@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agendamento - Escolha do Barbeiro</title>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#D4AF37", // Gold
+                        "primary-hover": "#B5952F",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#121212", // Premium Dark
+                        "surface-dark": "#1E1E1E",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    boxShadow: {
+                        'premium': '0 10px 30px -5px rgba(212, 175, 55, 0.15)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }.barber-radio:checked + div {
+            border-color: #D4AF37;
+            background-color: #FFFCF2;box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }:is(.dark .barber-radio:checked + div) {
+            background-color: rgba(212, 175, 55, 0.08);
+            border-color: #D4AF37;
+        }
+        .barber-radio:checked + div .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .barber-radio:checked + div .img-ring {
+            border-color: #D4AF37;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-x-hidden text-gray-900 dark:text-white">
+<div class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md p-4 pb-2 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+<button class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-gray-900 dark:text-white" style="font-size: 24px;">arrow_back</span>
+</button>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">Agendamento</h2>
+</div>
+<div class="flex w-full flex-row items-center justify-center gap-2 py-4 px-4">
+<div class="h-1.5 flex-1 rounded-full bg-gray-200 dark:bg-gray-800"></div> 
+<div class="h-1.5 flex-1 rounded-full bg-primary shadow-[0_0_8px_rgba(212,175,55,0.4)]"></div> 
+<div class="h-1.5 flex-1 rounded-full bg-gray-200 dark:bg-gray-800"></div> 
+<div class="h-1.5 flex-1 rounded-full bg-gray-200 dark:bg-gray-800"></div> 
+</div>
+<div class="px-5 pb-2 pt-2">
+<h1 class="text-gray-900 dark:text-white tracking-tight text-[28px] font-bold leading-tight">Quem vai cuidar do seu visual hoje?</h1>
+<p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal pt-2">Selecione um especialista abaixo.</p>
+</div>
+<form class="flex flex-col gap-4 px-4 py-4 pb-28">
+<label class="cursor-pointer group relative">
+<input class="barber-radio peer sr-only" name="barber" type="radio" value="lucas"/>
+<div class="relative flex flex-col p-4 bg-white dark:bg-surface-dark rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all duration-300 hover:shadow-premium">
+<div class="flex items-start gap-4">
+<div class="relative">
+<div class="img-ring h-16 w-16 rounded-full overflow-hidden border-2 border-transparent transition-colors duration-300">
+<div class="w-full h-full bg-center bg-cover" data-alt="Portrait of a male barber with a well-groomed beard and tattoos smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHCjrgJucdicVcrvu2RMnJyUyZs6_X9w69FUJCoak822nZ6vvkEKfuWNhjYTKFTaxNFJ-zvZOvbLx7nF2u8bphxLnr01sFyfGA8ZeOl5Qd3S-shem6IOMjL1HFz8AZagDAxWgTDrhxYlAf_38JC-X6xyVTRQH943CmjNNZhm4Szlpvjlp94iWO6YbMdWu4Dgv8GrBa9slpEbBgZ8OPtu_F1s3JlCwG70CxDNrMeGIPgQTBHyWg9wCJjrkHImIGk1iJlW_4rkDY-4Ky');"></div>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-surface-dark rounded-full p-0.5">
+<div class="bg-green-500 h-3 w-3 rounded-full border-2 border-white dark:border-surface-dark"></div>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Lucas Mendes</h3>
+<div class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[16px] fill-1">star</span>
+<span class="font-medium text-gray-900 dark:text-white">4.9</span>
+<span>(142 avaliações)</span>
+</div>
+</div>
+<div class="check-icon opacity-0 scale-75 transition-all duration-300 h-6 w-6 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-white text-[18px] font-bold">check</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Degradê</span>
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Barba Lenhador</span>
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Pigmentação</span>
+</div>
+<p class="mt-3 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Especialista em cortes modernos e design de barba. Gosto de entender o estilo do cliente antes de começar.</p>
+<div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2 text-xs font-medium text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Próximo horário: Hoje, 14:00
+            </div>
+</div>
+</label>
+<label class="cursor-pointer group relative">
+<input class="barber-radio peer sr-only" name="barber" type="radio" value="rafael"/>
+<div class="relative flex flex-col p-4 bg-white dark:bg-surface-dark rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all duration-300 hover:shadow-premium">
+<div class="flex items-start gap-4">
+<div class="relative">
+<div class="img-ring h-16 w-16 rounded-full overflow-hidden border-2 border-transparent transition-colors duration-300">
+<div class="w-full h-full bg-center bg-cover" data-alt="Close up portrait of a barber holding scissors with focus" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZBVm7nP9Anbzz7HFeVWDCDatZOzFUJr99OD5XAS3g3WkRLBRAjd4g1m9gL0Ny_kkIj02lYrU5vbE3C04VxcBOmSJT5nIu2Usw7OW0tnSlSfR2wsC1-McvAGp2mxJQsaQ4SN_7br_baF0_ejvUfMVO29CyCHam1PuTnAXbMgb6re1h4kf6rjceCkhu_-q6Y903hlbbpk4L10RBu0cGbXUsHOLiRjtqjXWvd_sS8nyhJNXgrNRducyrVwi0VcA1WN4cjs1G2rlUAfOi');"></div>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-white dark:bg-surface-dark rounded-full p-0.5">
+<div class="bg-green-500 h-3 w-3 rounded-full border-2 border-white dark:border-surface-dark"></div>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Rafael Costa</h3>
+<div class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[16px] fill-1">star</span>
+<span class="font-medium text-gray-900 dark:text-white">5.0</span>
+<span>(89 avaliações)</span>
+</div>
+</div>
+<div class="check-icon opacity-0 scale-75 transition-all duration-300 h-6 w-6 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-white text-[18px] font-bold">check</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Corte Social</span>
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Navalhado</span>
+</div>
+<p class="mt-3 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Mais de 10 anos de experiência. O clássico nunca sai de moda. Venha renovar seu visual com técnica e precisão.</p>
+<div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2 text-xs font-medium text-gray-400 dark:text-gray-500">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                Próximo horário: Amanhã, 09:30
+            </div>
+</div>
+</label>
+<label class="cursor-pointer group relative">
+<input class="barber-radio peer sr-only" name="barber" type="radio" value="matheus"/>
+<div class="relative flex flex-col p-4 bg-white dark:bg-surface-dark rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all duration-300 hover:shadow-premium">
+<div class="flex items-start gap-4">
+<div class="relative">
+<div class="img-ring h-16 w-16 rounded-full overflow-hidden border-2 border-transparent transition-colors duration-300">
+<div class="w-full h-full bg-center bg-cover" data-alt="Stylish barber with glasses working on a haircut" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD76KjFA_nzlb-WRweGWuK7wANBm9PdSqRRxSRJZ2k0iWTd_0tqtxPjjLND_n6b6KCns0EE1wuKIR9H9gb_XqjsYwD-0D8kWLH4P4-9LAiugqEKBncXssweUasuhSbCJn2e0-6b_ghJxzLSu6hoB4NcFpD3lvqbGL31lstVwZBwPvQlqQLTqTcAQ8FsOaelUA-PhGdbu2Qe-eAjSjatLr7dzZvn-c4-9vcR2J1sIOKs30L4nMBR2H_94nv5-OSwOKXljJDoUgv_QKuz');"></div>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">Matheus Oliveira</h3>
+<div class="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+<span class="material-symbols-outlined text-primary text-[16px] fill-1">star</span>
+<span class="font-medium text-gray-900 dark:text-white">4.8</span>
+<span>(210 avaliações)</span>
+</div>
+</div>
+<div class="check-icon opacity-0 scale-75 transition-all duration-300 h-6 w-6 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined text-white text-[18px] font-bold">check</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Platinado</span>
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Freestyle</span>
+<span class="px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-800 text-xs font-medium text-gray-900 dark:text-gray-200">Sobrancelha</span>
+</div>
+<p class="mt-3 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Criatividade é o meu forte. Se você quer algo diferente e ousado, está no lugar certo.</p>
+<div class="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2 text-xs font-medium text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                Próximo horário: Hoje, 16:45
+            </div>
+</div>
+</label>
+</form>
+<div class="fixed bottom-0 left-0 w-full bg-white/95 dark:bg-background-dark/95 border-t border-gray-100 dark:border-gray-800 p-4 pb-8 backdrop-blur-lg">
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Total estimado</span>
+<span class="text-xl font-bold text-gray-900 dark:text-white">R$ 65,00</span>
+</div>
+<button class="flex-1 bg-primary hover:bg-primary-hover active:scale-95 text-white text-base font-bold h-14 rounded-full flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/30">
+                Continuar
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agendamento - Seleção de Serviço</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C6A45C", 
+                        "primary-dark": "#B89246",
+                        "background-light": "#FFFFFF",
+                        "background-subtle": "#F9FAFB",
+                        "text-main": "#1A1A1A",
+                        "text-secondary": "#6B7280",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem", 
+                        "lg": "1.5rem", 
+                        "xl": "2rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>.no-scrollbar::-webkit-scrollbar {
+    display: none
+    }
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none
+    }.custom-checkbox:checked {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC8bNnXsX6HadbYDrZEvWtTCadJsLge8cd0G1aHIxfYn2pNFAXejKuqKhtzsfVO4oqn-48hiqrpTO_-iWsvHxYiiO1Ln0lA2I2hUU_3cbr1_0peIWG3Gsp2Mw_c4Vgt3JAmGYkZcnd3Jk6VAHCxT3Mt8xWrYGMpqI94W3nLwRNdj4MAsTtJjr_xdZm_cpZMFE2L71txBE2wBKoXCv_vnadspseomljCLUa4UYr5StblsGdiJQlfKdSr2JCkyE0Hlma1Nked5ZybSBsx);
+    background-color: #C6A45C;
+    border-color: #C6A45C
+    }
+body {
+    min-height: max(884px, 100dvh)
+    }
+.mask-gradient {
+    mask-image: linear-gradient(to right, transparent, black 10px, black calc(100% - 10px), transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10px, black calc(100% - 10px), transparent)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-subtle font-display text-text-main antialiased selection:bg-primary selection:text-white">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden pb-24">
+<header class="sticky top-0 z-30 bg-background-light/95 backdrop-blur-md border-b border-zinc-100 transition-colors duration-300">
+<div class="flex items-center p-4 justify-between h-16">
+<button class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-zinc-50 transition-colors text-text-main border border-zinc-100">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-text-main text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">
+                    Escolha o Serviço
+                </h2>
+</div>
+</header>
+<div class="sticky top-16 z-20 bg-background-subtle pt-4 pb-4 transition-colors duration-300">
+<div class="flex gap-3 px-4 overflow-x-auto no-scrollbar mask-gradient">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-6 transition-transform active:scale-95 shadow-md shadow-primary/20 text-white">
+<span class="text-sm font-bold leading-normal">Todos</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white border border-zinc-200 px-6 transition-all hover:bg-zinc-50 hover:border-primary/30 active:scale-95 shadow-sm text-text-secondary">
+<span class="text-sm font-medium leading-normal">Cabelo</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white border border-zinc-200 px-6 transition-all hover:bg-zinc-50 hover:border-primary/30 active:scale-95 shadow-sm text-text-secondary">
+<span class="text-sm font-medium leading-normal">Barba</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white border border-zinc-200 px-6 transition-all hover:bg-zinc-50 hover:border-primary/30 active:scale-95 shadow-sm text-text-secondary">
+<span class="text-sm font-medium leading-normal">Combos</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white border border-zinc-200 px-6 transition-all hover:bg-zinc-50 hover:border-primary/30 active:scale-95 shadow-sm text-text-secondary">
+<span class="text-sm font-medium leading-normal">Química</span>
+</button>
+</div>
+</div>
+<main class="flex flex-col gap-4 px-4 pt-2">
+<label class="group relative flex cursor-pointer overflow-hidden rounded-xl bg-white p-4 shadow-sm border-2 border-primary transition-all hover:shadow-md ring-2 ring-primary/5">
+<div class="flex flex-1 items-start gap-4">
+<div class="shrink-0 relative overflow-hidden rounded-lg size-[80px] bg-zinc-100 shadow-inner">
+<img alt="Homem com corte de cabelo degradê moderno" class="size-full object-cover transform transition-transform duration-500 group-hover:scale-110" data-alt="Modern fade haircut side view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFB9JTL2QpyXMb_Skx0aypbdwfdxPJNtHjcyHVmjiCRpi8-YGOrxiATlNgcGxFoOlms63jEohQ1NQdoXZoa7nLYGDPjNmz6i2yXj-Ffhjb5FKUPrzHjMIOE_rIhSNUbXHQb3US2XQZO4aVECdnIAUlwCaEN5z1ODxUlADjqV6MJeCnudR8h1gvwmGtlPv1QKqA1Cc5jB_D4xmJmVjkUBt5gWHiJlzT5_9vqYlgjwJe8WXZuDUq3xsj4tqaN94tc3QY8mP--LuugbOs"/>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<h3 class="text-text-main text-base font-bold leading-tight group-hover:text-primary transition-colors">Corte Degradê</h3>
+</div>
+<p class="text-text-secondary text-xs font-normal leading-normal line-clamp-2">
+                            Corte moderno com navalha, acabamento premium e lavagem especial.
+                        </p>
+<div class="mt-2 flex items-center gap-3">
+<div class="flex items-center gap-1 rounded bg-zinc-50 border border-zinc-100 px-1.5 py-0.5">
+<span class="material-symbols-outlined text-[14px] text-zinc-400">schedule</span>
+<span class="text-xs font-semibold text-zinc-600">45 min</span>
+</div>
+<span class="text-sm font-bold text-primary">R$ 60,00</span>
+</div>
+</div>
+</div>
+<div class="absolute right-4 top-4">
+<input checked="" class="custom-checkbox size-6 rounded-full border-2 border-zinc-300 bg-transparent text-primary focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+</div>
+</label>
+<label class="group relative flex cursor-pointer overflow-hidden rounded-xl bg-white p-4 shadow-sm border border-zinc-100 transition-all hover:border-primary/50 hover:shadow-md active:scale-[0.99]">
+<div class="flex flex-1 items-start gap-4">
+<div class="shrink-0 relative overflow-hidden rounded-lg size-[80px] bg-zinc-100 shadow-inner">
+<img alt="Barbeiro aparando barba com toalha quente" class="size-full object-cover transform transition-transform duration-500 group-hover:scale-110" data-alt="Close up of beard trimming with towel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUxam58Qj_EegqLRv-c5SDmD9XeYB2bHyymS9AfeQaqTNYi_B9m490yBJizx9C5YdAZmYOjg_fOry9Lmd3yTmjDUGRdX6Y6hXLDzB4kVIIjuQizBNE_AysWYWksaAn-jyGrb8izSgjuZ91nCsC0q_tv9qumjX8PFu7YgEfZWPbTiMvBGHzza7MLsRL6h3Hi4lI72RNgq_0DTy0oKNHF2d4wQbfWcCkTAECfmqeEpXlT2wvXW4XN391fqo3NX_T-HKwpqiCpgS5HxjG"/>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<h3 class="text-text-main text-base font-bold leading-tight group-hover:text-primary transition-colors">Barba Completa</h3>
+<p class="text-text-secondary text-xs font-normal leading-normal line-clamp-2">
+                            Modelagem com toalha quente, balm hidratante e massagem facial.
+                        </p>
+<div class="mt-2 flex items-center gap-3">
+<div class="flex items-center gap-1 rounded bg-zinc-50 border border-zinc-100 px-1.5 py-0.5">
+<span class="material-symbols-outlined text-[14px] text-zinc-400">schedule</span>
+<span class="text-xs font-semibold text-zinc-600">30 min</span>
+</div>
+<span class="text-sm font-bold text-primary">R$ 45,00</span>
+</div>
+</div>
+</div>
+<div class="absolute right-4 top-4">
+<input class="custom-checkbox size-6 rounded-full border-2 border-zinc-300 bg-transparent text-primary focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+</div>
+</label>
+<label class="group relative flex cursor-pointer overflow-hidden rounded-xl bg-white p-4 shadow-sm border border-zinc-100 transition-all hover:border-primary/50 hover:shadow-md active:scale-[0.99]">
+<div class="flex flex-1 items-start gap-4">
+<div class="shrink-0 relative overflow-hidden rounded-lg size-[80px] bg-zinc-100 shadow-inner">
+<img alt="Homem sendo atendido na cadeira de barbeiro" class="size-full object-cover transform transition-transform duration-500 group-hover:scale-110" data-alt="Man in barber chair getting full service" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBskgirMdiZ8cdfklZVBdiIjIwXT_nQ1pQt1T3Wt3APD37ulyVjV3I2SUjnWLF8_6vufNsKLqYnUYFr1O0Kd5cZbY5YhX3RKLXBNviaF7EOk7iS-htfRx3XaNZRuJaS7EwMdIrNORQUqhxlmBtpOAg-ts0-ZzZIYPY32SMys3Fvw2AMBjHE26hsAmxRnYexe3YOXoa6xwY8woHdQejGf5QeJSn-VQXBJOMIolyxNCJaaUTkcjtmmXn_LKpPQMM9nmcdGYiJF1mExKk3"/>
+</div>
+<div class="flex flex-col justify-center gap-1 pr-8">
+<div class="flex items-center gap-2 flex-wrap">
+<h3 class="text-text-main text-base font-bold leading-tight group-hover:text-primary transition-colors">Combo Corte + Barba</h3>
+<span class="rounded-full bg-gradient-to-r from-primary to-primary-dark px-2 py-0.5 text-[10px] font-bold text-white shadow-sm shadow-primary/30">POPULAR</span>
+</div>
+<p class="text-text-secondary text-xs font-normal leading-normal line-clamp-2">
+                            O pacote completo para renovar o visual. Economize R$ 10,00.
+                        </p>
+<div class="mt-2 flex items-center gap-3">
+<div class="flex items-center gap-1 rounded bg-zinc-50 border border-zinc-100 px-1.5 py-0.5">
+<span class="material-symbols-outlined text-[14px] text-zinc-400">schedule</span>
+<span class="text-xs font-semibold text-zinc-600">1h 15m</span>
+</div>
+<span class="text-sm font-bold text-primary">R$ 95,00</span>
+</div>
+</div>
+</div>
+<div class="absolute right-4 top-4">
+<input class="custom-checkbox size-6 rounded-full border-2 border-zinc-300 bg-transparent text-primary focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+</div>
+</label>
+<label class="group relative flex cursor-pointer overflow-hidden rounded-xl bg-white p-4 shadow-sm border border-zinc-100 transition-all hover:border-primary/50 hover:shadow-md active:scale-[0.99]">
+<div class="flex flex-1 items-start gap-4">
+<div class="shrink-0 relative overflow-hidden rounded-lg size-[80px] bg-zinc-100 shadow-inner">
+<img alt="Produtos de cabelo e tesouras em bancada de madeira" class="size-full object-cover transform transition-transform duration-500 group-hover:scale-110" data-alt="Hair products and scissors on wooden shelf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZWzW4wbdjPAP7m5kvtJFzRAbUJKGMM3bDrAVR8_XNi2RlZ7XX9VJkTxTfjeLjmrikZ3wCw82VvoZPV3JLNVazPzu5elIBd0sLPxfxiL8ekoVIOfIxJH31oya-Jx3TdXCSUluJ4HaFSzTMS9Bqt7gHHllU-tJaYL_2Uv0qijsXvuVAwPTW5eMhUhTsM85NHrqh0ey1yoGef9S7kRSQoYGXDIB-5tlZg0c3Tw6jQ1aRRGuIvFwUYWhn_hnPtZYpSX7Zs90UX-iMGYzw"/>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<h3 class="text-text-main text-base font-bold leading-tight group-hover:text-primary transition-colors">Camuflagem de Brancos</h3>
+<p class="text-text-secondary text-xs font-normal leading-normal line-clamp-2">
+                            Pigmentação natural para disfarçar fios brancos sem aspecto artificial.
+                        </p>
+<div class="mt-2 flex items-center gap-3">
+<div class="flex items-center gap-1 rounded bg-zinc-50 border border-zinc-100 px-1.5 py-0.5">
+<span class="material-symbols-outlined text-[14px] text-zinc-400">schedule</span>
+<span class="text-xs font-semibold text-zinc-600">40 min</span>
+</div>
+<span class="text-sm font-bold text-primary">R$ 70,00</span>
+</div>
+</div>
+</div>
+<div class="absolute right-4 top-4">
+<input class="custom-checkbox size-6 rounded-full border-2 border-zinc-300 bg-transparent text-primary focus:ring-2 focus:ring-primary/20 focus:ring-offset-0 transition-colors" type="checkbox"/>
+</div>
+</label>
+<div class="h-8"></div> 
+</main>
+<div class="fixed bottom-0 z-40 w-full bg-white/90 backdrop-blur-lg border-t border-zinc-100 p-4 pb-8 shadow-[0_-4px_30px_rgba(0,0,0,0.06)]">
+<div class="mx-auto max-w-md flex flex-col gap-3">
+<div class="flex items-center justify-between px-1">
+<span class="text-xs font-medium text-text-secondary">1 serviço selecionado</span>
+<span class="text-xs font-medium text-text-secondary">Total estimado</span>
+</div>
+<button class="group flex w-full items-center justify-between rounded-full bg-gradient-to-r from-primary to-primary-dark px-6 py-4 shadow-lg shadow-primary/30 transition-transform active:scale-[0.98] hover:shadow-xl hover:shadow-primary/40">
+<span class="text-base font-bold text-white tracking-wide">Continuar</span>
+<div class="flex items-center gap-2">
+<span class="text-base font-bold text-white">R$ 60,00</span>
+<span class="material-symbols-outlined text-white text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+
+</body></html>

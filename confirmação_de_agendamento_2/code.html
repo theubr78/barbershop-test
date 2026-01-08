@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Confirmação de Agendamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C2953C", 
+                        "primary-dark": "#9F782D",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#0A0A0A",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    boxShadow: {
+                        "gold": "0 10px 20px -5px rgba(194, 149, 60, 0.25), 0 8px 8px -6px rgba(194, 149, 60, 0.1)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gray-50 dark:bg-black font-display min-h-screen flex flex-col items-center">
+<div class="relative flex h-full min-h-screen w-full max-w-md flex-col overflow-hidden bg-background-light dark:bg-background-dark shadow-2xl mx-auto pb-8">
+<div class="flex items-center bg-transparent p-4 pb-2 justify-between z-10">
+<div class="text-slate-900 dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer transition-opacity hover:opacity-70">
+<span class="material-symbols-outlined text-2xl">close</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Confirmação</h2>
+<div class="flex w-12 items-center justify-end">
+<button class="text-primary text-base font-bold leading-normal tracking-[0.015em] shrink-0 hover:text-primary-dark transition-colors">Concluído</button>
+</div>
+</div>
+<div class="flex flex-col px-4 pt-4 pb-6">
+<div class="flex flex-col items-center gap-4">
+<div class="bg-primary/10 dark:bg-primary/20 rounded-full p-4 mb-2 animate-bounce-short">
+<span class="material-symbols-outlined text-5xl text-primary">check_circle</span>
+</div>
+<div class="flex max-w-[480px] flex-col items-center gap-2">
+<p class="text-slate-900 dark:text-white text-2xl font-bold leading-tight tracking-tight text-center">Agendamento Confirmado!</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal text-center px-4">Enviamos os detalhes da reserva para seu e-mail e WhatsApp.</p>
+</div>
+</div>
+</div>
+<div class="px-4 w-full">
+<div class="bg-white dark:bg-zinc-900 rounded-xl shadow-md border border-slate-100 dark:border-zinc-800 overflow-hidden flex flex-col">
+<div class="h-32 w-full bg-cover bg-center relative" data-alt="Close up of barber tools and vintage chair" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBkmWYxl5a8tHLhQ6_VFoO7XbLDbeyLpiGwNaW_Z0_-c4C8Y091CeUlucOrXwgWejmuAuAcoxE--csWGRyyXkJVvEABS5XeCffJgYk8JPk3leThxDOs9PEhj1DjZyDdlozlhUMmj_cQJxhV8Vx3wJBOmhp0Q39ZRg4ztrhyz85ZhNcOgQEjH80jPRwfO0dlP8awa5LHaKTZ467BkRrx9fA0yyBhNfQ-zKdsOrI-IJym_AE8FHOXewgJ7jzsBdSJ5c9NKhBpDiKimvYn");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-3 left-4 text-white">
+<p class="text-xs font-medium uppercase tracking-wider opacity-90 text-yellow-100">Serviço</p>
+<p class="text-xl font-bold">Barba e Cabelo</p>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<div class="bg-primary/10 rounded-lg p-2 text-primary shrink-0">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div class="flex flex-col">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase">Data e Hora</p>
+<p class="text-slate-900 dark:text-white text-base font-bold">Terça, 14 de Outubro</p>
+<p class="text-slate-900 dark:text-white text-base font-normal">15:30</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="bg-primary/10 rounded-lg p-2 text-primary shrink-0">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div class="flex flex-col w-full">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase">Local</p>
+<p class="text-slate-900 dark:text-white text-base font-semibold">Barbearia Viking</p>
+<div class="flex justify-between items-center w-full mt-1">
+<p class="text-slate-500 dark:text-slate-400 text-sm">Rua Augusta, 123</p>
+<a class="text-primary text-xs font-bold flex items-center gap-1 hover:underline hover:text-primary-dark" href="#">
+                                    Ver mapa
+                                    <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</a>
+</div>
+</div>
+</div>
+<div class="h-px w-full bg-slate-100 dark:bg-zinc-800 my-1"></div>
+<div class="flex items-center justify-between">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Valor Total</p>
+<p class="text-primary dark:text-primary text-xl font-bold">R$ 80,00</p>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-zinc-900/50 p-4 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10 border-2 border-white dark:border-zinc-700 shadow-sm" data-alt="Portrait of a professional barber smiling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAC2zYVsfbirqPu52g3aIooQBPpm_JdomqjZb0orGqLc6JO6HcObqSH89oCr-XeN-_SPiEk0hXmri5YQz7wfGPzA9asdKafhXUTb2alfTyQwFNg7-71KGtvwO78wPtNLaKH6UKh5PfsgkWBZZgmNqQct7obF7sykgQE_lYCG_QHH7vyPychlJ5HlJdbTOFy2jAvblG9RkCE4pU3AfXwDVusbUKf6-ocvFpOdqtfGPfHL9zC4HPqvN1zRRD8VvatqbdthWwExZRIYzRS");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-white text-sm font-bold leading-normal">João Silva</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal leading-normal">Barbeiro Profissional</p>
+</div>
+</div>
+<button class="text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</div>
+</div>
+<div class="px-4 pt-4 w-full">
+<div class="flex flex-col items-start justify-between gap-3 rounded-lg border border-primary/20 bg-primary/5 dark:bg-primary/10 dark:border-primary/20 p-4 sm:flex-row sm:items-center">
+<div class="flex items-start gap-3">
+<div class="bg-primary/20 text-primary-dark dark:text-primary p-1.5 rounded-md">
+<span class="material-symbols-outlined text-xl">loyalty</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<p class="text-slate-900 dark:text-white text-sm font-bold leading-tight">Programa Fidelidade</p>
+<p class="text-slate-600 dark:text-slate-300 text-xs font-normal leading-normal">Você ganhou <span class="font-bold text-primary dark:text-primary">+80 pontos</span> com este agendamento!</p>
+</div>
+</div>
+<a class="text-xs font-bold leading-normal tracking-[0.015em] flex items-center gap-1 text-primary hover:text-primary-dark transition-colors mt-2 sm:mt-0" href="#">
+                    Ver Saldo
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-3 px-4 py-6 w-full mt-auto">
+<button class="flex items-center justify-center gap-2 w-full rounded-lg bg-primary hover:bg-primary-dark text-white font-bold text-base py-3.5 shadow-gold transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">send</span> 
+                Enviar Comprovante no WhatsApp
+            </button>
+<button class="flex items-center justify-center gap-2 w-full rounded-lg bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 hover:bg-slate-50 dark:hover:bg-zinc-700 text-slate-700 dark:text-slate-200 font-semibold text-base py-3.5 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-slate-500">calendar_today</span>
+                Adicionar à Agenda
+            </button>
+<a class="text-slate-500 dark:text-slate-400 text-sm font-medium text-center py-2 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+                Voltar para o Início
+            </a>
+</div>
+</div>
+
+</body></html>

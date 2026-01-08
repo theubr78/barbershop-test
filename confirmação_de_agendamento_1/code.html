@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CRM de Clientes</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#D4AF37", // Metallic Gold
+                        "primary-dark": "#AA8C2C",
+                        "primary-light": "#F3E5AB",
+                        "background-light": "#FDFDFD", // Very slightly off-white for richness
+                        "background-dark": "#1C1C1E", // Premium dark grey
+                        "gold-accent": "#B8860B",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    boxShadow: {
+                        "premium": "0 4px 20px -2px rgba(212, 175, 55, 0.15)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gray-50 dark:bg-background-dark font-display min-h-screen flex flex-col items-center">
+<div class="relative flex h-full min-h-screen w-full max-w-md flex-col overflow-hidden bg-background-light dark:bg-background-dark shadow-2xl mx-auto pb-20">
+<div class="sticky top-0 z-20 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800">
+<div class="flex items-center p-4 pb-3 justify-between">
+<div class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center cursor-pointer transition-opacity hover:opacity-70 rounded-full hover:bg-gray-50 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center font-serif">CRM de Clientes</h2>
+<div class="flex size-10 items-center justify-center">
+<button class="text-slate-900 dark:text-white shrink-0 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+</div>
+</div>
+<div class="px-4 pb-4 space-y-3">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 material-symbols-outlined text-xl group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all shadow-sm" placeholder="Buscar por nome, telefone, email..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+<button class="px-4 py-1.5 rounded-full bg-slate-900 dark:bg-white text-primary dark:text-slate-900 text-xs font-semibold whitespace-nowrap shadow-sm border border-slate-900 dark:border-white">
+                        Todos
+                    </button>
+<button class="px-4 py-1.5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-slate-600 dark:text-slate-300 text-xs font-medium whitespace-nowrap hover:border-primary/50 hover:text-primary dark:hover:text-primary transition-colors">
+                        Ativos
+                    </button>
+<button class="px-4 py-1.5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-slate-600 dark:text-slate-300 text-xs font-medium whitespace-nowrap hover:border-primary/50 hover:text-primary dark:hover:text-primary transition-colors">
+                        Ausentes
+                    </button>
+<button class="px-4 py-1.5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-slate-600 dark:text-slate-300 text-xs font-medium whitespace-nowrap hover:border-primary/50 hover:text-primary dark:hover:text-primary transition-colors">
+                        VIP
+                    </button>
+</div>
+</div>
+</div>
+<div class="flex flex-col p-4 gap-4 overflow-y-auto">
+<div class="bg-gradient-to-r from-red-50 to-white dark:from-red-900/10 dark:to-gray-800 border border-red-100 dark:border-red-900/30 rounded-xl p-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="bg-red-100 dark:bg-red-800/40 p-2 rounded-full text-red-600 dark:text-red-400 shrink-0">
+<span class="material-symbols-outlined text-xl">warning</span>
+</div>
+<div>
+<p class="text-slate-900 dark:text-white text-sm font-bold">5 Clientes Ausentes</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Sem visita há mais de 30 dias</p>
+</div>
+</div>
+<button class="text-xs font-bold bg-white dark:bg-red-900/40 text-red-600 dark:text-red-300 px-3 py-1.5 rounded-lg border border-red-100 dark:border-red-800 shadow-sm hover:bg-red-50 transition-colors">
+                    Filtrar
+                </button>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-premium border border-primary/20 dark:border-primary/10 overflow-hidden group relative">
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-3xl -mr-2 -mt-2"></div>
+<div class="p-4 relative z-10">
+<div class="flex justify-between items-start gap-3 mb-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-cover bg-center border-2 border-primary dark:border-primary-dark shadow-sm" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAC2zYVsfbirqPu52g3aIooQBPpm_JdomqjZb0orGqLc6JO6HcObqSH89oCr-XeN-_SPiEk0hXmri5YQz7wfGPzA9asdKafhXUTb2alfTyQwFNg7-71KGtvwO78wPtNLaKH6UKh5PfsgkWBZZgmNqQct7obF7sykgQE_lYCG_QHH7vyPychlJ5HlJdbTOFy2jAvblG9RkCE4pU3AfXwDVusbUKf6-ocvFpOdqtfGPfHL9zC4HPqvN1zRRD8VvatqbdthWwExZRIYzRS");'></div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-slate-900 dark:text-white font-bold text-base font-serif">Ricardo Souza</h3>
+<span class="bg-gradient-to-r from-primary to-primary-dark text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">OURO</span>
+</div>
+<p class="text-slate-400 dark:text-slate-500 text-xs font-medium">11 99876-5432</p>
+</div>
+</div>
+<button class="text-slate-300 dark:text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-2 mb-4">
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Visitas</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">18</p>
+</div>
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Gasto</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">R$ 1.2k</p>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 rounded-lg p-2 text-center border border-primary/20">
+<p class="text-[10px] text-primary-dark dark:text-primary uppercase tracking-wider font-semibold">Pontos</p>
+<p class="text-primary-dark dark:text-primary font-bold text-sm">850</p>
+</div>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-center gap-2 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-3 py-1.5 rounded-lg border border-red-100 dark:border-red-900/30">
+<span class="material-symbols-outlined text-base">history</span>
+<p class="text-xs font-semibold">Ausente há 45 dias <span class="text-red-400 dark:text-red-500 font-normal">(Última: 15 Ago)</span></p>
+</div>
+<div class="flex items-start gap-2 px-1">
+<span class="material-symbols-outlined text-slate-400 text-base mt-0.5">sticky_note_2</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs italic">"Prefere horário de almoço. Gosta de corte na tesoura."</p>
+</div>
+</div>
+<div class="border-t border-gray-100 dark:border-gray-700 pt-3 mt-1">
+<p class="text-[10px] text-slate-400 mb-2 font-medium uppercase tracking-wide text-center">Reengajamento Rápido</p>
+<button class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white py-2.5 rounded-lg transition-all active:scale-[0.98] shadow-md shadow-green-600/20">
+<span class="material-symbols-outlined text-lg">chat</span>
+<span class="text-sm font-bold">Convidar via WhatsApp</span>
+</button>
+<p class="text-[10px] text-center text-slate-400 mt-2">
+                            "Olá Ricardo! Faz 45 dias que não te vemos..."
+                        </p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow">
+<div class="p-4">
+<div class="flex justify-between items-start gap-3 mb-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-cover bg-center border-2 border-white dark:border-gray-600 shadow-sm flex items-center justify-center bg-gray-100 text-gray-400">
+<span class="material-symbols-outlined text-2xl">person</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-slate-900 dark:text-white font-bold text-base font-serif">Bruno Lima</h3>
+<span class="bg-slate-100 dark:bg-gray-700 text-slate-600 dark:text-slate-300 text-[10px] font-bold px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-600">PRATA</span>
+</div>
+<p class="text-slate-400 dark:text-slate-500 text-xs font-medium">brunolima@email.com</p>
+</div>
+</div>
+<button class="text-slate-300 dark:text-slate-600 hover:text-primary">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-2 mb-4">
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Visitas</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">8</p>
+</div>
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Gasto</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">R$ 450</p>
+</div>
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Pontos</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">320</p>
+</div>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 px-1">
+<span class="material-symbols-outlined text-base text-green-500">check_circle</span>
+<p class="text-xs font-medium">Última visita: 10 dias atrás</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<button class="flex items-center justify-center gap-1.5 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_add_on</span>
+<span class="text-xs font-bold">Agendar</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 bg-gray-50 dark:bg-gray-700/50 hover:bg-green-50 dark:hover:bg-green-900/20 text-slate-700 dark:text-slate-200 hover:text-green-700 dark:hover:text-green-400 hover:border-green-200 dark:hover:border-green-800 py-2 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span class="text-xs font-bold">WhatsApp</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow">
+<div class="p-4">
+<div class="flex justify-between items-start gap-3 mb-4">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-cover bg-center border-2 border-white dark:border-gray-600 shadow-sm" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBkmWYxl5a8tHLhQ6_VFoO7XbLDbeyLpiGwNaW_Z0_-c4C8Y091CeUlucOrXwgWejmuAuAcoxE--csWGRyyXkJVvEABS5XeCffJgYk8JPk3leThxDOs9PEhj1DjZyDdlozlhUMmj_cQJxhV8Vx3wJBOmhp0Q39ZRg4ztrhyz85ZhNcOgQEjH80jPRwfO0dlP8awa5LHaKTZ467BkRrx9fA0yyBhNfQ-zKdsOrI-IJym_AE8FHOXewgJ7jzsBdSJ5c9NKhBpDiKimvYn");'></div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-slate-900 dark:text-white font-bold text-base font-serif">Lucas Silva</h3>
+<span class="bg-amber-700/10 dark:bg-amber-900/30 text-amber-800 dark:text-amber-500 text-[10px] font-bold px-1.5 py-0.5 rounded border border-amber-200 dark:border-amber-800">BRONZE</span>
+</div>
+<p class="text-slate-400 dark:text-slate-500 text-xs font-medium">11 98888-1111</p>
+</div>
+</div>
+<button class="text-slate-300 dark:text-slate-600 hover:text-primary">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-2 mb-4">
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Visitas</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">3</p>
+</div>
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Gasto</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">R$ 180</p>
+</div>
+<div class="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-2 text-center">
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Pontos</p>
+<p class="text-slate-900 dark:text-white font-bold text-sm">120</p>
+</div>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-center gap-2 text-slate-600 dark:text-slate-400 px-1">
+<span class="material-symbols-outlined text-base text-green-500">check_circle</span>
+<p class="text-xs font-medium">Última visita: 2 dias atrás</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<button class="flex items-center justify-center gap-1.5 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 text-slate-700 dark:text-slate-200 py-2 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_add_on</span>
+<span class="text-xs font-bold">Agendar</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 bg-gray-50 dark:bg-gray-700/50 hover:bg-green-50 dark:hover:bg-green-900/20 text-slate-700 dark:text-slate-200 hover:text-green-700 dark:hover:text-green-400 hover:border-green-200 dark:hover:border-green-800 py-2 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span class="text-xs font-bold">WhatsApp</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-8"></div>
+</div>
+<button class="absolute bottom-6 right-6 h-14 w-14 bg-gradient-to-br from-primary to-primary-dark text-white rounded-full shadow-lg shadow-primary/40 flex items-center justify-center hover:scale-105 transition-transform active:scale-95 z-30 border border-white/20">
+<span class="material-symbols-outlined text-2xl">person_add</span>
+</button>
+</div>
+
+</body></html>

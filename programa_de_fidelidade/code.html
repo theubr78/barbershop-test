@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Programa de Fidelidade</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C69C3A",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#111111",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display antialiased selection:bg-primary/20">
+<div class="flex items-center bg-white dark:bg-[#1a202c] p-4 pb-2 justify-between sticky top-0 z-50 shadow-sm border-b border-gray-100 dark:border-gray-800">
+<div class="text-[#111318] dark:text-white flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+<span class="material-symbols-outlined" style="font-size: 24px;">arrow_back</span>
+</div>
+<h2 class="text-[#111318] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
+            Programa de Fidelidade</h2>
+</div>
+<main class="flex-1 overflow-y-auto pb-8">
+<div class="px-4 py-6">
+<div class="bg-white dark:bg-[#1a202c] rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-800">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Seu saldo atual</p>
+<h1 class="text-4xl font-extrabold text-[#111318] dark:text-white tracking-tight">450 <span class="text-primary text-xl">pts</span></h1>
+</div>
+<div class="flex flex-col items-end">
+<div class="bg-primary/10 text-primary dark:bg-primary/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] fill-1">military_tech</span>
+                            Ouro
+                        </div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-[#111318] dark:text-gray-300">Nível Ouro</span>
+<span class="text-gray-400 dark:text-gray-500">Próx: Diamante (1000 pts)</span>
+</div>
+<div class="relative h-3 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="absolute h-full bg-primary rounded-full" style="width: 45%;"></div>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-xs mt-1">Faltam 550 pontos para o próximo nível.</p>
+</div>
+</div>
+</div>
+<div class="px-4 mb-6">
+<h3 class="text-[#111318] dark:text-white text-lg font-bold mb-3 px-1">Como funciona</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-white dark:bg-[#1a202c] p-3 rounded-lg border border-gray-100 dark:border-gray-800 flex flex-col gap-2">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">currency_exchange</span>
+</div>
+<div>
+<p class="font-bold text-sm text-[#111318] dark:text-white">R$ 2 = 1 ponto</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Em todos os serviços</p>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a202c] p-3 rounded-lg border border-gray-100 dark:border-gray-800 flex flex-col gap-2">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">content_cut</span>
+</div>
+<div>
+<p class="font-bold text-sm text-[#111318] dark:text-white">10 cortes = 1 grátis</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Sistema de carimbo</p>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a202c] p-3 rounded-lg border border-gray-100 dark:border-gray-800 flex flex-col gap-2">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">all_inclusive</span>
+</div>
+<div>
+<p class="font-bold text-sm text-[#111318] dark:text-white">Sem validade</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Pontos nunca expiram</p>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a202c] p-3 rounded-lg border border-gray-100 dark:border-gray-800 flex flex-col gap-2">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+</div>
+<div>
+<p class="font-bold text-sm text-[#111318] dark:text-white">Auto-evolução</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Suba de nível sozinho</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-8">
+<h3 class="text-[#111318] dark:text-white text-lg font-bold mb-3 px-4">Níveis de Benefícios</h3>
+<div class="flex overflow-x-auto scrollbar-hide px-4 pb-4 gap-4 snap-x snap-mandatory">
+<div class="snap-center shrink-0 w-[280px] bg-white dark:bg-[#1a202c] rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col shadow-sm">
+<div class="h-24 bg-gradient-to-r from-orange-300 to-orange-100 dark:from-orange-900 dark:to-orange-800 p-4 flex items-center justify-between">
+<span class="text-orange-900 dark:text-orange-100 font-bold text-xl">Bronze</span>
+<span class="material-symbols-outlined text-orange-800 dark:text-orange-200 text-4xl opacity-50">workspace_premium</span>
+</div>
+<div class="p-4 flex flex-col gap-3 flex-1">
+<ul class="space-y-2 text-sm text-[#111318] dark:text-gray-300">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Acesso ao clube
+                            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                1 Ponto a cada R$ 2
+                            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Resgate de produtos básicos
+                            </li>
+</ul>
+</div>
+</div>
+<div class="snap-center shrink-0 w-[280px] bg-white dark:bg-[#1a202c] rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col shadow-sm">
+<div class="h-24 bg-gradient-to-r from-gray-300 to-gray-100 dark:from-gray-700 dark:to-gray-600 p-4 flex items-center justify-between">
+<span class="text-gray-900 dark:text-white font-bold text-xl">Prata</span>
+<span class="material-symbols-outlined text-gray-700 dark:text-gray-300 text-4xl opacity-50">workspace_premium</span>
+</div>
+<div class="p-4 flex flex-col gap-3 flex-1">
+<div class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Benefícios Bronze +</div>
+<ul class="space-y-2 text-sm text-[#111318] dark:text-gray-300">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                5% OFF em produtos
+                            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Prioridade na agenda
+                            </li>
+</ul>
+</div>
+</div>
+<div class="snap-center shrink-0 w-[280px] bg-white dark:bg-[#1a202c] rounded-xl border-2 border-primary/20 overflow-hidden flex flex-col shadow-lg relative">
+<div class="absolute top-2 right-2 bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
+                        Seu Nível</div>
+<div class="h-24 bg-gradient-to-r from-amber-400 to-amber-200 dark:from-amber-700 dark:to-amber-600 p-4 flex items-center justify-between">
+<span class="text-amber-900 dark:text-amber-100 font-bold text-xl">Ouro</span>
+<span class="material-symbols-outlined text-amber-800 dark:text-amber-200 text-4xl opacity-50">workspace_premium</span>
+</div>
+<div class="p-4 flex flex-col gap-3 flex-1">
+<div class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Benefícios Prata +</div>
+<ul class="space-y-2 text-sm text-[#111318] dark:text-gray-300">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                10% OFF em serviços
+                            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Bebida VIP gratuita
+                            </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Acesso a eventos exclusivos
+                            </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 mb-8">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-[#111318] dark:text-white text-lg font-bold">Catálogo de Recompensas</h3>
+<a class="text-primary text-sm font-medium" href="#">Ver tudo</a>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white dark:bg-[#1a202c] rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col">
+<div class="w-full aspect-[4/3] bg-gray-200 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Classic haircut service image with scissors and comb" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6hODjGZcJzOj9xFU9OC3gYyJNco9yMGJJ6inE0hjeDSfzbKT7LtYpmDh609URBLAPeUQyzXSkjw433X5N693tnaz004dAd6MVyt1NkZ3un2ZbhEgkxn7VN2v8H74B4rWJKiCFm2yAmb-DxnfGuZVLsV3YJx2AquSJOgkFdq914E2TEXXHGyAg9dZDuwK_ebIc3Tvd3UAgqCJZNFNdqyHhOoTDK0fVDSBuQo5pg8CAb2pDTj8ga0oWTi2O74AAGuqNnMnk6eS7mrWU');"></div>
+</div>
+<div class="p-3 flex flex-col flex-1 gap-2">
+<h4 class="text-sm font-bold text-[#111318] dark:text-white leading-tight">Corte Clássico</h4>
+<p class="text-primary font-bold text-sm">1.000 pts</p>
+<button class="mt-auto w-full py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-xs font-semibold transition-colors">Resgatar</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col">
+<div class="w-full aspect-[4/3] bg-gray-200 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Container of hair pomade product on a wooden shelf" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDdi2wdVfUvuWxYqq6PGQRCFwXAcSfioKxkweKyqpWeu0VpCbzufJcv8VxvIAfIygQzDqyJju8v3AzxhD5ITL-_XoA6IB6MvyWsfk3hbfaf3xfFk6Ho7gkTJIPaAMeW_1JL4FL6ebCJzr21ioveiuYYFXgRI83c0OTCetEQDsQk1q13J_traK4rBx5R20PT27loJNLswZIOyjneOvxp4Qahi6CtrmH1sqKhiwxdJ77eRPnU4PyQqiyLwwgaXtJho18gPnK7ZXj6cUgY');"></div>
+</div>
+<div class="p-3 flex flex-col flex-1 gap-2">
+<h4 class="text-sm font-bold text-[#111318] dark:text-white leading-tight">Pomada Matte</h4>
+<p class="text-primary font-bold text-sm">500 pts</p>
+<button class="mt-auto w-full py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-[#111318] dark:text-white rounded-lg text-xs font-semibold transition-colors">Detalhes</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col">
+<div class="w-full aspect-[4/3] bg-gray-200 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Close up of beard trimming service with electric razor" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_fJd1Jp5uZF7l9w9hs5dADHefaSUaoPGpBJQQ1i5kwZF_rkQcN_LRZ2bCwdMD62nIpmonHzqtNhJWf-p7BKdJ7bCeRP457dDztWe7EOW1QoPdYtYc-AVcwyqeiarxllYqg1HtSmF82sAc9evwqlJ3v9FPV-YVZghfgoTpFd8omMvsYo1pIKydjui8_FhvYhZAMvR0bifXayes8Xj35mWJabn-ykG-fa25pbTfNjkCXhFA6kvqSPUCSZhgYfGdmAk1TWZ5xyWqTvVf');"></div>
+</div>
+<div class="p-3 flex flex-col flex-1 gap-2">
+<h4 class="text-sm font-bold text-[#111318] dark:text-white leading-tight">Barba Terapia</h4>
+<p class="text-primary font-bold text-sm">800 pts</p>
+<button class="mt-auto w-full py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-xs font-semibold transition-colors">Resgatar</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col">
+<div class="w-full aspect-[4/3] bg-gray-200 relative">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Bottle of craft beer on a bar counter" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpT1X9JSYDSxDz1ewx4KmuDuoYjUiiklFh7p1poLXkcmApx2TpDrYHBa1i0MiGHPTB-IaFSpoB1ZXGcihePgnOByl8DbXaSn2bfc_yNI7ljFlZ-ddArp3a9EFUtfB7bnuVlcwho2gIuUIVYPZJlX6oISORKA2HCbtcqUO57BMePwkV59bES8D9CvKqZMtKBZSVBYjSqsoVoxfEVINbPb4WoiaWIFTLzXhbuINNHrynK9IasHN_7R0ZTwD8-PHDpRIrC4tlIFjHZ_ot');"></div>
+</div>
+<div class="p-3 flex flex-col flex-1 gap-2">
+<h4 class="text-sm font-bold text-[#111318] dark:text-white leading-tight">Bebida Artesanal</h4>
+<p class="text-primary font-bold text-sm">200 pts</p>
+<button class="mt-auto w-full py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-xs font-semibold transition-colors">Resgatar</button>
+</div>
+</div>
+</div>
+</div>
+<div class="px-4 mb-8">
+<h3 class="text-[#111318] dark:text-white text-lg font-bold mb-4">Ranking Top 10 Clientes</h3>
+<div class="bg-white dark:bg-[#1a202c] rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-sm">
+<div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800 text-xs font-medium text-gray-500">
+<div class="w-8 text-center">#</div>
+<div class="flex-1 px-3">Cliente</div>
+<div class="text-right">Pts</div>
+</div>
+<div class="divide-y divide-gray-100 dark:divide-gray-800">
+<div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<div class="w-8 flex justify-center">
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">emoji_events</span>
+</div>
+<div class="flex items-center gap-3 flex-1 px-3">
+<div class="size-8 rounded-full bg-cover bg-center border border-gray-200 dark:border-gray-700" data-alt="Portrait of a smiling man with a beard" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZyihnSQ7EZg1KJYTIe_LMA18j-gonbSq_SrPj5DLAOyU16HSm5zM0Eb-gRYcEVizwJSOeC5_eQugm5Qsjbsa_Z7ycFvHVrs7_Gjptq5o59GSbGuVlWBaT7FkcfMucaesGOm7frUuUmDhjRNMXtV3ieObvAcNS9ydxxfJsgVVObv6Jf2MuyipSIDmn69qFpLyFMWBD8G6eDeL22wY3Gcw73AAZkyBfpvmjMXOogKaUKXo5CPfTPpDGTOJQzIOkRV2mBzpbJ5fIK2x5');"></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#111318] dark:text-white leading-none">Carlos Mendes</span>
+<span class="text-[10px] text-gray-500 mt-1">28 visitas • R$ 2.400</span>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-sm font-bold text-primary">1200</span>
+<span class="block text-[10px] text-primary font-bold uppercase">Ouro</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<div class="w-8 flex justify-center">
+<span class="material-symbols-outlined text-gray-400" style="font-size: 20px;">emoji_events</span>
+</div>
+<div class="flex items-center gap-3 flex-1 px-3">
+<div class="size-8 rounded-full bg-cover bg-center border border-gray-200 dark:border-gray-700" data-alt="Portrait of a man with glasses looking at camera" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB51cTcR4lmHjBAYNo7zuz6YWqBDE0ycjaGMN0eZVHPUwzzNUL6mgfRXpndI_hwcLmNshWai39Sm4J2F9lEmWQxa2S-SN1WfAJ2NQRLdFtE_fOptQLued9Z_sSx9iiB4ZuSYwb4uy3nwOl_1ODsWbH_kBcqvaovg0UBWt3U6HRraf3rQs_6EDZ17ISruvdpGiboUVP1e2ShzxEod9Uo0kqOWpei2spmttbGuqaPvQcX9xUom4r5SWwdilgU7xMNg8h7DNUeXOmp76oq');"></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#111318] dark:text-white leading-none">Rafael Costa</span>
+<span class="text-[10px] text-gray-500 mt-1">24 visitas • R$ 1.950</span>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-sm font-bold text-primary">975</span>
+<span class="block text-[10px] text-gray-500 font-bold uppercase">Prata</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<div class="w-8 flex justify-center">
+<span class="material-symbols-outlined text-orange-400" style="font-size: 20px;">emoji_events</span>
+</div>
+<div class="flex items-center gap-3 flex-1 px-3">
+<div class="size-8 rounded-full bg-cover bg-center border border-gray-200 dark:border-gray-700" data-alt="Portrait of a young man with stylish haircut" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBAErVt2PYTgEz_tafY670Oo5-Wk9pxPALxnt8brkovCKBxJpf5sbRgbdweTwV1Uuj1RS94Qis8rqRRsaSb0FQpZlywG4BblTNq8wnzZce2Qvf4XusdCwaMwdb4n8aJytBgw6OL5CUqxDdT8f5Kzftovh6aHgeLbCGWGscu5vPS5-KNQedDAdMwEFAgLjSdJ8Tz-ihxwzN0RIs70mU4CRkP-GGmKcxdtdrPlFQG4JPRUsrKnVFiqBeuab7PfhzNv8sE2WvIiiAur0lx');"></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#111318] dark:text-white leading-none">Bruno Silva</span>
+<span class="text-[10px] text-gray-500 mt-1">20 visitas • R$ 1.600</span>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-sm font-bold text-primary">800</span>
+<span class="block text-[10px] text-gray-500 font-bold uppercase">Prata</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<div class="w-8 text-center text-sm font-bold text-gray-400">4</div>
+<div class="flex items-center gap-3 flex-1 px-3">
+<div class="size-8 rounded-full bg-cover bg-center border border-gray-200 dark:border-gray-700" data-alt="Portrait of a man with short hair" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpe0I2nw2SJZuAdD2YivFqViLPpqZaaq59lbZ8iMSKAZBBMCiLMBCODcg7D8IpOjMRRfu0wCAT4GvkW0PRoW_rlNeTA8YXZ0lUg5diUyA8jUfmOP7PJVhJLBh1wfN2FYUrZjSvCu_n68TCvhuyTd4JEpKSBJEBUlYV52FBmcgCIpoDueezKwWRqbVeFyxp_qhOhNNCnHgVdLJbogmsXhMYwVdU9NITunIAzZtSfTp-uXHVrfK364uajgfAzmwvVC5NTiDwv_9ue7JU');"></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#111318] dark:text-white leading-none">João Pedro</span>
+<span class="text-[10px] text-gray-500 mt-1">15 visitas • R$ 1.200</span>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-sm font-bold text-primary">600</span>
+<span class="block text-[10px] text-orange-700 dark:text-orange-400 font-bold uppercase">Bronze</span>
+</div>
+</div>
+</div>
+<div class="p-3 text-center border-t border-gray-100 dark:border-gray-800">
+<button class="text-xs font-semibold text-gray-500 hover:text-primary transition-colors">Ver ranking completo</button>
+</div>
+</div>
+</div>
+<div class="px-4 text-center pb-8">
+<p class="text-xs text-gray-400 dark:text-gray-500 max-w-xs mx-auto leading-relaxed">
+                Os benefícios podem variar de acordo com a disponibilidade. As recompensas resgatadas são válidas por 30 dias.
+                <br/><br/>
+<a class="underline hover:text-primary" href="#">Termos e Condições</a>
+</p>
+</div>
+</main>
+
+</body></html>
