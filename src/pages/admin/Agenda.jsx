@@ -161,9 +161,9 @@ const Agenda = () => {
                                 <Card
                                     key={apt.id}
                                     hover
-                                    className={`relative overflow-hidden ${hasFreeCut ? 'border-2 border-yellow-500 shadow-glow-gold' : ''}`}
+                                    className={`relative ${hasFreeCut ? 'border-2 border-yellow-500 shadow-glow-gold' : ''}`}
                                 >
-                                    <div className={`absolute left-0 top-0 bottom-0 w-1 ${hasFreeCut ? 'bg-yellow-500' : 'bg-accent-purple'}`} />
+                                    <div className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-lg ${hasFreeCut ? 'bg-yellow-500' : 'bg-accent-purple'}`} />
                                     <div className="pl-4">
                                         {/* Free Cut Alert */}
                                         {hasFreeCut && (

@@ -10,7 +10,7 @@ service cloud.firestore {
     // Helper function to check if user is admin of the barbershop
     function isAdmin(barbershopId) {
       return isAuthenticated() && 
-             request.auth.token.barbershopId == barbershopId;
+             (request.auth.token.barbershopId == barbershopId || request.auth.token.email == 'samuel.r.28@hotmail.com');
     }
     
     // Barbershops collection - only admins can create/modify

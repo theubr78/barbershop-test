@@ -72,7 +72,12 @@ export const AppProvider = ({ children }) => {
                 })
 
                 setServices(servicesData)
-                setBarbers(barbersData)
+                setBarbers(barbersData.map(b => {
+                    if (b.name === 'Samuel Rodrigues') {
+                        return { ...b, photo: '/barbers/samuel.jpeg' }
+                    }
+                    return b
+                }))
                 setCustomers(customersData)
                 setAppointments(appointmentsData)
 
@@ -117,15 +122,30 @@ export const AppProvider = ({ children }) => {
                 return aptDate >= startDate && aptDate <= endDate && apt.status !== 'cancelled'
             })
 
-            const revenue = filtered.reduce((sum, apt) => {
-                const service = servicesData.find(s => s.id === apt.serviceId)
-                return sum + (service?.price || 0)
+            // Calculate metrics using simple logic for now, utilizing the raw data but applying the business rule:
+            // Revenue is only REALIZED if status is 'completed'
+
+            const realizedRevenue = filtered.reduce((sum, apt) => {
+                if (apt.status === 'completed' && !apt.redeemed) {
+                    const service = servicesData.find(s => s.id === apt.serviceId)
+                    return sum + (service?.price || 0)
+                }
+                return sum
+            }, 0)
+
+            const projectedRevenue = filtered.reduce((sum, apt) => {
+                if (apt.status !== 'cancelled' && !apt.redeemed) {
+                    const service = servicesData.find(s => s.id === apt.serviceId)
+                    return sum + (service?.price || 0)
+                }
+                return sum
             }, 0)
 
             return {
                 appointments: filtered.length,
-                revenue,
-                newCustomers: 0 // Would need to track this separately
+                revenue: realizedRevenue, // Primary metric is now Realized Revenue
+                projectedRevenue: projectedRevenue,
+                newCustomers: 0
             }
         }
 
@@ -323,53 +343,52 @@ export const AppProvider = ({ children }) => {
         const apt = appointments.find(a => a.id === appointmentId)
         if (!apt) return null
 
-        const customer = customers.find(c => c.id === apt.customerId)
-        if (!customer) return null
+        const customerData = customers.find(c => c.id === apt.customerId)
+        if (!customerData) return null
+
+        // Instantiate Customer model
+        const { Customer } = await import('../models/Customer')
+        const customerModel = new Customer(customerData)
+
+        const service = services.find(s => s.id === apt.serviceId)
+        const price = service?.price || 0
 
         // Update appointment status
         await updateAppointment(appointmentId, { status: 'completed' })
 
-        // Increment loyalty cuts
-        const newCuts = (customer.loyaltyCuts || 0) + 1
-        const newTotalCompleted = (customer.totalCutsCompleted || 0) + 1
+        // Use model logic for visit and loyalty
+        const result = customerModel.addVisit(price, apt.date)
 
-        if (newCuts >= 10) {
-            // Ganhou corte grátis!
-            await updateCustomer(customer.id, {
-                loyaltyCuts: 0,  // Reset counter
-                freeCutsAvailable: (customer.freeCutsAvailable || 0) + 1,
-                totalCutsCompleted: newTotalCompleted,
-                lastVisit: apt.date,
-            })
-            return {
-                reward: true,
-                customer: {
-                    ...customer,
-                    loyaltyCuts: 0,
-                    freeCutsAvailable: (customer.freeCutsAvailable || 0) + 1
-                }
-            }
-        } else {
-            await updateCustomer(customer.id, {
-                loyaltyCuts: newCuts,
-                totalCutsCompleted: newTotalCompleted,
-                lastVisit: apt.date,
-            })
-            return {
-                reward: false,
-                customer: { ...customer, loyaltyCuts: newCuts },
-                progress: newCuts
-            }
+        // Persist changes
+        await updateCustomer(customerData.id, {
+            visits: customerModel.visits,
+            totalSpent: customerModel.totalSpent,
+            lastVisit: customerModel.lastVisit,
+            loyaltyCuts: customerModel.loyaltyCuts,
+            freeCutsAvailable: customerModel.freeCutsAvailable,
+            totalCutsCompleted: customerModel.totalCutsCompleted
+        })
+
+        return {
+            reward: result.reward,
+            customer: customerModel,
+            progress: customerModel.loyaltyCuts
         }
     }
 
     const redeemFreeCut = async (customerId, appointmentId) => {
-        const customer = customers.find(c => c.id === customerId)
-        if (!customer || customer.freeCutsAvailable <= 0) return false
+        const customerData = customers.find(c => c.id === customerId)
+        if (!customerData) return false
 
-        // Decrement free cuts
+        // Instantiate Customer model
+        const { Customer } = await import('../models/Customer')
+        const customerModel = new Customer(customerData)
+
+        if (!customerModel.redeemFreeCut()) return false
+
+        // Persist changes
         await updateCustomer(customerId, {
-            freeCutsAvailable: customer.freeCutsAvailable - 1,
+            freeCutsAvailable: customerModel.freeCutsAvailable,
         })
 
         // Mark appointment as completed without incrementing cuts

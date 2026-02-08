@@ -65,7 +65,14 @@ const Customers = () => {
 
     const handleWhatsAppContact = (customer) => {
         const daysAbsent = getDaysSinceLastVisit(customer.lastVisit)
-        const message = generateReEngagementMessage(customer.name, daysAbsent || 0)
+        let message = ''
+
+        if (daysAbsent && daysAbsent >= 30) {
+            message = generateReEngagementMessage(customer.name, daysAbsent)
+        } else {
+            message = `Olá ${customer.name}! 👋 Tudo bem? Como podemos ajudar você hoje?`
+        }
+
         const link = generateWhatsAppLink(customer.phone, message)
         window.open(link, '_blank')
     }
@@ -118,8 +125,8 @@ const Customers = () => {
                         <button
                             onClick={() => setFilter('all')}
                             className={`px-4 py-2 rounded-lg whitespace-nowrap transition-all ${filter === 'all'
-                                    ? 'bg-accent-purple text-white'
-                                    : 'bg-dark-900/50 text-white/60 hover:bg-dark-900'
+                                ? 'bg-accent-purple text-white'
+                                : 'bg-dark-900/50 text-white/60 hover:bg-dark-900'
                                 }`}
                         >
                             Todos ({customers.length})
@@ -127,8 +134,8 @@ const Customers = () => {
                         <button
                             onClick={() => setFilter('absent')}
                             className={`px-4 py-2 rounded-lg whitespace-nowrap transition-all ${filter === 'absent'
-                                    ? 'bg-accent-purple text-white'
-                                    : 'bg-dark-900/50 text-white/60 hover:bg-dark-900'
+                                ? 'bg-accent-purple text-white'
+                                : 'bg-dark-900/50 text-white/60 hover:bg-dark-900'
                                 }`}
                         >
                             Ausentes ({absentCustomers.length})
@@ -136,8 +143,8 @@ const Customers = () => {
                         <button
                             onClick={() => setFilter('active')}
                             className={`px-4 py-2 rounded-lg whitespace-nowrap transition-all ${filter === 'active'
-                                    ? 'bg-accent-purple text-white'
-                                    : 'bg-dark-900/50 text-white/60 hover:bg-dark-900'
+                                ? 'bg-accent-purple text-white'
+                                : 'bg-dark-900/50 text-white/60 hover:bg-dark-900'
                                 }`}
                         >
                             Ativos ({customers.length - absentCustomers.length})
@@ -205,17 +212,16 @@ const Customers = () => {
                                             </div>
                                         </div>
 
-                                        {isAbsent && (
-                                            <div className="flex gap-2">
-                                                <Button
-                                                    size="sm"
-                                                    onClick={() => handleWhatsAppContact(customer)}
-                                                    icon={<MessageCircle size={16} />}
-                                                >
-                                                    Reengajar via WhatsApp
-                                                </Button>
-                                            </div>
-                                        )}
+                                        <div className="flex gap-2">
+                                            <Button
+                                                size="sm"
+                                                variant={isAbsent ? 'primary' : 'secondary'}
+                                                onClick={() => handleWhatsAppContact(customer)}
+                                                icon={<MessageCircle size={16} />}
+                                            >
+                                                {isAbsent ? 'Reengajar via WhatsApp' : 'WhatsApp'}
+                                            </Button>
+                                        </div>
 
                                         {customer.notes && (
                                             <p className="text-sm text-white/60 italic mt-2">

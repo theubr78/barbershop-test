@@ -37,7 +37,7 @@ const Dashboard = () => {
             trend: '+12%',
         },
         {
-            label: 'Receita Hoje',
+            label: 'Receita Realizada',
             value: formatCurrency(statistics.today.revenue),
             icon: DollarSign,
             color: 'text-green-500',
@@ -194,7 +194,7 @@ const Dashboard = () => {
 
                             <div className="flex items-center justify-between pt-4 border-t border-white/10">
                                 <div>
-                                    <p className="text-xs text-white/60">Este Mês</p>
+                                    <p className="text-xs text-white/60">Receita Realizada (Mês)</p>
                                     <p className="text-2xl font-bold text-white">
                                         {formatCurrency(statistics.month.revenue)}
                                     </p>

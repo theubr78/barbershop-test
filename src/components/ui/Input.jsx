@@ -9,7 +9,10 @@ const Input = forwardRef(({
     return (
         <div className="w-full">
             {label && (
-                <label className="block text-sm font-medium text-white/70 mb-2">
+                <label
+                    htmlFor={props.id}
+                    className="block text-sm font-medium text-white/70 mb-2"
+                >
                     {label}
                 </label>
             )}

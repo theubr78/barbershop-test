@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Check, Scissors, User, Calendar, Clock, Phone } from 'lucide-react'
 import { useApp } from '../../contexts/AppContext'
 import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
-import { formatCurrency, validateEmail, validatePhone, validateName, generateTimeSlots, isSlotAvailable } from '../../utils/helpers'
+import { formatCurrency, validatePhone, validateName, generateTimeSlots, isSlotAvailable } from '../../utils/helpers'
 
 const BookingFlow = () => {
     const navigate = useNavigate()
@@ -18,10 +18,22 @@ const BookingFlow = () => {
     const [selectedTime, setSelectedTime] = useState('')
     const [customerData, setCustomerData] = useState({
         name: '',
-        email: '',
         phone: '',
     })
     const [errors, setErrors] = useState({})
+
+    // Load from LocalStorage on mount
+    useEffect(() => {
+        const saved = localStorage.getItem('barber_user_data')
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved)
+                setCustomerData(prev => ({ ...prev, ...parsed }))
+            } catch (e) {
+                console.error('Error loading saved data', e)
+            }
+        }
+    }, [])
 
     const activeServices = services.filter(s => s.active)
     const activeBarbers = barbers.filter(b => b.active)
@@ -41,7 +53,7 @@ const BookingFlow = () => {
     const getAvailableTimeSlots = () => {
         if (!selectedBarber || !selectedDate) return []
 
-        const dayOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date(selectedDate).getDay()]
+        const dayOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date(selectedDate + 'T12:00:00').getDay()]
         const schedule = selectedBarber.schedule[dayOfWeek]
 
         if (!schedule) return []
@@ -50,15 +62,27 @@ const BookingFlow = () => {
         return slots.filter(slot => isSlotAvailable(slot, appointments, selectedBarber.id, selectedDate))
     }
 
+    const handlePhoneBlur = () => {
+        if (!customerData.phone || customerData.phone.length < 10) return
+
+        // CLEAN phone for comparison
+        const cleanPhone = customerData.phone.replace(/\D/g, '')
+
+        // Find in loaded customers (AppContext has them)
+        const found = customers.find(c => c.phone.replace(/\D/g, '') === cleanPhone)
+
+        if (found) {
+            setCustomerData(prev => ({ ...prev, name: found.name }))
+            // Optional: Toast "Welcome back"
+        }
+    }
+
     const handleNext = async () => {
         if (step === 4) {
             // Validate customer data
             const newErrors = {}
             if (!validateName(customerData.name)) {
                 newErrors.name = 'Nome deve ter pelo menos 3 caracteres'
-            }
-            if (!validateEmail(customerData.email)) {
-                newErrors.email = 'Email inválido'
             }
             if (!validatePhone(customerData.phone)) {
                 newErrors.phone = 'Telefone inválido'
@@ -70,6 +94,12 @@ const BookingFlow = () => {
             }
 
             try {
+                // Save to LocalStorage
+                localStorage.setItem('barber_user_data', JSON.stringify({
+                    name: customerData.name,
+                    phone: customerData.phone
+                }))
+
                 // Create customer and appointment (both are async!)
                 const customer = await addCustomer(customerData)
                 const appointment = await addAppointment({
@@ -236,7 +266,7 @@ const BookingFlow = () => {
                                 {getAvailableDates().map((date) => {
                                     const dateObj = new Date(date + 'T12:00:00')
                                     const day = dateObj.getDate()
-                                    const month = dateObj.toLocaleDateString('pt-BR', { month: 'short' })
+                                    const weekday = dateObj.toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', '')
 
                                     return (
                                         <button
@@ -250,7 +280,7 @@ const BookingFlow = () => {
                                                 : 'border-white/20 text-white/70 hover:border-white/40'
                                                 }`}
                                         >
-                                            <div className="text-xs opacity-70">{month}</div>
+                                            <div className="text-xs opacity-70 uppercase tracking-wider">{weekday}</div>
                                             <div className="text-lg font-bold">{day}</div>
                                         </button>
                                     )
@@ -297,22 +327,17 @@ const BookingFlow = () => {
                                     value={customerData.name}
                                     onChange={(e) => setCustomerData({ ...customerData, name: e.target.value })}
                                     error={errors.name}
+                                    id="name"
                                     placeholder="João Silva"
-                                />
-                                <Input
-                                    label="Email"
-                                    type="email"
-                                    value={customerData.email}
-                                    onChange={(e) => setCustomerData({ ...customerData, email: e.target.value })}
-                                    error={errors.email}
-                                    placeholder="joao@email.com"
                                 />
                                 <Input
                                     label="Telefone (WhatsApp)"
                                     type="tel"
                                     value={customerData.phone}
                                     onChange={(e) => setCustomerData({ ...customerData, phone: e.target.value })}
+                                    onBlur={handlePhoneBlur}
                                     error={errors.phone}
+                                    id="phone"
                                     placeholder="(11) 98765-4321"
                                 />
                             </div>

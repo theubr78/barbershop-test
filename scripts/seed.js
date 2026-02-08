@@ -3,7 +3,7 @@
 
 import dotenv from 'dotenv'
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, doc, setDoc } from 'firebase/firestore'
+import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc } from 'firebase/firestore'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { services, barbers, customers, appointments } from '../src/data/mockData.js'
 
@@ -40,17 +40,32 @@ async function seedBarbershop() {
             active: true,
             settings: {
                 workingHours: {
-                    monday: { start: '09:00', end: '18:00' },
-                    tuesday: { start: '09:00', end: '18:00' },
-                    wednesday: { start: '09:00', end: '18:00' },
-                    thursday: { start: '09:00', end: '18:00' },
-                    friday: { start: '09:00', end: '20:00' },
-                    saturday: { start: '08:00', end: '16:00' },
-                    sunday: null
+                    monday: { start: '09:00', end: '19:00' },
+                    tuesday: { start: '09:00', end: '19:00' },
+                    wednesday: { start: '09:00', end: '19:00' },
+                    thursday: { start: '09:00', end: '19:00' },
+                    friday: { start: '09:00', end: '19:00' },
+                    saturday: { start: '08:00', end: '18:00' },
+                    sunday: { start: '08:30', end: '12:00' }
                 }
             }
         })
         console.log('✅ Barbershop created')
+
+        // Helper to clear collection
+        async function clearCollection(path) {
+            console.log(`Cleaning ${path}...`)
+            const snapshot = await getDocs(collection(db, path))
+            const deletePromises = snapshot.docs.map(doc => deleteDoc(doc.ref))
+            await Promise.all(deletePromises)
+            console.log(`Cleared ${snapshot.size} documents from ${path}`)
+        }
+
+        // Clear existing data
+        await clearCollection(`barbershops/${BARBERSHOP_ID}/services`)
+        await clearCollection(`barbershops/${BARBERSHOP_ID}/barbers`)
+        await clearCollection(`barbershops/${BARBERSHOP_ID}/customers`)
+        await clearCollection(`barbershops/${BARBERSHOP_ID}/appointments`)
 
         // 2. Seed Services
         console.log('Seeding services...')
