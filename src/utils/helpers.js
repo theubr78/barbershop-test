@@ -90,14 +90,21 @@ export const validateName = (name) => {
 }
 
 // Availability helpers
+const LUNCH_START = '12:00'
+const LUNCH_END = '14:00'
+
 export const generateTimeSlots = (startTime, endTime, duration = 30) => {
     const slots = []
     let current = parseTime(startTime)
     const end = parseTime(endTime)
+    const lunchStart = parseTime(LUNCH_START)
+    const lunchEnd = parseTime(LUNCH_END)
 
     while (current < end) {
-        slots.push(formatTimeSlot(current))
-        current += duration * 60 * 1000 // Add duration in milliseconds
+        if (current < lunchStart || current >= lunchEnd) {
+            slots.push(formatTimeSlot(current))
+        }
+        current += duration * 60 * 1000
     }
 
     return slots
