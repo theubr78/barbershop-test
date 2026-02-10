@@ -29,7 +29,7 @@ const BookingConfirmation = () => {
     }
 
     const whatsappMessage = `Olá! Acabei de agendar um horário:\n\n📅 Data: ${formatDate(appointment.date)}\n⏰ Horário: ${appointment.time}\n✂️ Serviço: ${service.name}\n👤 Barbeiro: ${barber.name}\n\nAguardo confirmação!`
-    const whatsappLink = generateWhatsAppLink('11987654321', whatsappMessage)
+    const whatsappLink = generateWhatsAppLink('71992139485', whatsappMessage)
 
     return (
         <div className="min-h-screen bg-gradient-dark py-12">

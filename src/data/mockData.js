@@ -91,6 +91,15 @@ export const services = [
         category: 'Química',
         active: true,
     },
+    {
+        id: 11,
+        name: 'Cabelo e Sobrancelha',
+        description: 'Corte de cabelo e design de sobrancelha',
+        price: 45,
+        duration: 60,
+        category: 'Combo',
+        active: true,
+    },
 ]
 
 export const barbers = [
