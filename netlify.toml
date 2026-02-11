@@ -12,11 +12,6 @@
   status = 200
   conditions = {Role = ["admin"]}
 
-# Specific API Routes
-[[redirects]]
-  from = "/api/subscription"
-  to = "/.netlify/functions/test-firebase"
-  status = 200
 
 # API routes go to functions
 [[redirects]]
