@@ -1,6 +1,76 @@
-const { findBarbershopByAsaasCustomer, updateSubscriptionStatus } = require('./utils/firebase-admin.cjs')
-const { getPayment } = require('./utils/asaas-client.cjs')
+const { initializeApp, cert, getApps } = require('firebase-admin/app')
+const { getFirestore } = require('firebase-admin/firestore')
 
+// --- Firebase Admin Setup ---
+let db
+
+function getDb() {
+    if (!db) {
+        if (getApps().length === 0) {
+            initializeApp({
+                credential: cert({
+                    projectId: process.env.FIREBASE_PROJECT_ID,
+                    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+                    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+                }),
+            })
+        }
+        db = getFirestore()
+    }
+    return db
+}
+
+async function findBarbershopByAsaasCustomer(asaasCustomerId) {
+    const snapshot = await getDb()
+        .collection('barbershops')
+        .where('subscription.asaasCustomerId', '==', asaasCustomerId)
+        .limit(1)
+        .get()
+
+    if (snapshot.empty) return null
+    const doc = snapshot.docs[0]
+    return { id: doc.id, ...doc.data() }
+}
+
+async function updateSubscriptionStatus(shopId, data) {
+    await getDb().collection('barbershops').doc(shopId).update({
+        'subscription.status': data.status,
+        'subscription.updatedAt': new Date().toISOString(),
+        ...(data.paidUntil && { 'subscription.paidUntil': data.paidUntil }),
+        ...(data.dueDate && { 'subscription.dueDate': data.dueDate }),
+    })
+}
+
+// --- Asaas Client Setup ---
+const ASAAS_BASE_URL = process.env.ASAAS_SANDBOX === 'true'
+    ? 'https://sandbox.asaas.com/api/v3'
+    : 'https://api.asaas.com/api/v3'
+
+async function asaasRequest(endpoint, options = {}) {
+    const response = await fetch(`${ASAAS_BASE_URL}${endpoint}`, {
+        ...options,
+        headers: {
+            'Content-Type': 'application/json',
+            'access_token': process.env.ASAAS_API_KEY,
+            ...options.headers,
+        },
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+        console.error('Asaas API error:', data)
+        throw new Error(data.errors?.[0]?.description || 'Asaas API error')
+    }
+
+    return data
+}
+
+async function getPayment(paymentId) {
+    return asaasRequest(`/payments/${paymentId}`)
+}
+
+// --- Main Handler ---
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method not allowed' }
@@ -88,4 +158,3 @@ function calculateNextDueDate(currentDueDate) {
     date.setMonth(date.getMonth() + 1)
     return date.toISOString().split('T')[0]
 }
-
