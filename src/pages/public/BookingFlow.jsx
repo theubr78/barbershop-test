@@ -58,7 +58,7 @@ const BookingFlow = () => {
 
         if (!schedule) return []
 
-        const slots = generateTimeSlots(schedule.start, schedule.end, 30)
+        const slots = generateTimeSlots(schedule.start, schedule.end, schedule.interval || 30)
         return slots.filter(slot => isSlotAvailable(slot, appointments, selectedBarber.id, selectedDate))
     }
 

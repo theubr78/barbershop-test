@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Calendar, Filter, ChevronLeft, ChevronRight, Home, CalendarDays, Users, Award } from 'lucide-react'
+import { Calendar, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useApp } from '../../contexts/AppContext'
 import { useToast } from '../../contexts/ToastContext'
 import Card from '../../components/ui/Card'
@@ -81,14 +80,14 @@ const Agenda = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-dark">
+        <div>
             {/* Header */}
             <div className="bg-dark-800 border-b border-white/10 p-4">
                 <h1 className="text-2xl font-display font-bold text-white">Agenda</h1>
                 <p className="text-sm text-white/60">Gerencie seus agendamentos e finalize serviços</p>
             </div>
 
-            <div className="p-4 pb-24 max-w-7xl mx-auto">
+            <div className="p-4 pb-6 max-w-7xl mx-auto">
                 {/* Date Navigator */}
                 <Card className="mb-4">
                     <div className="flex items-center justify-between">
@@ -247,29 +246,6 @@ const Agenda = () => {
                 onConfirm={handleConfirmCompletion}
                 onRedeemFreeCut={handleRedeemFreeCut}
             />
-
-            {/* Mobile Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 bg-dark-800 border-t border-white/10 lg:hidden">
-                <div className="flex items-center justify-around p-2">
-                    {[
-                        { icon: Home, label: 'Início', to: '/admin' },
-                        { icon: CalendarDays, label: 'Agenda', to: '/admin/agenda' },
-                        { icon: Users, label: 'Clientes', to: '/admin/clientes' },
-                        { icon: Award, label: 'Fidelidade', to: '/admin/fidelidade' },
-                    ].map((item) => (
-                        <Link
-                            key={item.to}
-                            to={item.to}
-                            className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/5 transition-colors flex-1"
-                        >
-                            <item.icon size={20} className={item.to === '/admin/agenda' ? 'text-accent-purple' : 'text-white/60'} />
-                            <span className={`text-xs ${item.to === '/admin/agenda' ? 'text-accent-purple' : 'text-white/60'}`}>
-                                {item.label}
-                            </span>
-                        </Link>
-                    ))}
-                </div>
-            </nav>
         </div>
     )
 }

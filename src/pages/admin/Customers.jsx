@@ -1,22 +1,23 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
     Search,
     UserPlus,
     MessageCircle,
     TrendingDown,
-    Home,
-    CalendarDays,
     Users as UsersIcon,
-    Award,
     Phone,
-    Mail
+    Mail,
+    Pencil,
+    Trash2,
+    Plus
 } from 'lucide-react'
 import { useApp } from '../../contexts/AppContext'
+import { useToast } from '../../contexts/ToastContext'
 import Card from '../../components/ui/Card'
 import Badge from '../../components/ui/Badge'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
+import Modal from '../../components/ui/Modal'
 import {
     getDaysSinceLastVisit,
     filterAbsentCustomers,
@@ -25,21 +26,31 @@ import {
     formatCurrency
 } from '../../utils/helpers'
 
-const Customers = () => {
-    const { customers } = useApp()
-    const [searchTerm, setSearchTerm] = useState('')
-    const [filter, setFilter] = useState('all') // all, absent, active
+const emptyCustomer = {
+    name: '',
+    phone: '',
+    email: '',
+    notes: '',
+}
 
-    // Filter logic
+const Customers = () => {
+    const { customers, addCustomer, updateCustomer, deleteCustomer } = useApp()
+    const { showSuccess, showInfo } = useToast()
+
+    const [searchTerm, setSearchTerm] = useState('')
+    const [filter, setFilter] = useState('all')
+    const [modalOpen, setModalOpen] = useState(false)
+    const [editingCustomer, setEditingCustomer] = useState(null)
+    const [form, setForm] = useState(emptyCustomer)
+    const [confirmDelete, setConfirmDelete] = useState(null)
+
     const filteredCustomers = customers.filter(customer => {
-        // Search filter
         const matchesSearch = customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             customer.phone.includes(searchTerm) ||
-            customer.email.toLowerCase().includes(searchTerm.toLowerCase())
+            (customer.email || '').toLowerCase().includes(searchTerm.toLowerCase())
 
         if (!matchesSearch) return false
 
-        // Status filter
         if (filter === 'absent') {
             const daysAbsent = getDaysSinceLastVisit(customer.lastVisit)
             return daysAbsent !== null && daysAbsent >= 30
@@ -48,7 +59,6 @@ const Customers = () => {
             const daysAbsent = getDaysSinceLastVisit(customer.lastVisit)
             return daysAbsent === null || daysAbsent < 30
         }
-
         return true
     })
 
@@ -66,26 +76,66 @@ const Customers = () => {
     const handleWhatsAppContact = (customer) => {
         const daysAbsent = getDaysSinceLastVisit(customer.lastVisit)
         let message = ''
-
         if (daysAbsent && daysAbsent >= 30) {
             message = generateReEngagementMessage(customer.name, daysAbsent)
         } else {
             message = `Olá ${customer.name}! 👋 Tudo bem? Como podemos ajudar você hoje?`
         }
-
         const link = generateWhatsAppLink(customer.phone, message)
         window.open(link, '_blank')
     }
 
+    const openAddModal = () => {
+        setEditingCustomer(null)
+        setForm(emptyCustomer)
+        setModalOpen(true)
+    }
+
+    const openEditModal = (customer) => {
+        setEditingCustomer(customer)
+        setForm({
+            name: customer.name,
+            phone: customer.phone || '',
+            email: customer.email || '',
+            notes: customer.notes || '',
+        })
+        setModalOpen(true)
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (editingCustomer) {
+            await updateCustomer(editingCustomer.id, form)
+            showSuccess('Cliente atualizado com sucesso!')
+        } else {
+            await addCustomer(form)
+            showSuccess('Cliente adicionado com sucesso!')
+        }
+        setModalOpen(false)
+    }
+
+    const handleDelete = async (id) => {
+        await deleteCustomer(id)
+        setConfirmDelete(null)
+        showInfo('Cliente removido')
+    }
+
+    const isFormValid = form.name.trim().length >= 2 && form.phone.trim().length >= 10
+
     return (
-        <div className="min-h-screen bg-gradient-dark">
+        <div>
             {/* Header */}
-            <div className="bg-dark-800 border-b border-white/10 p-4">
-                <h1 className="text-2xl font-display font-bold text-white">Clientes</h1>
-                <p className="text-sm text-white/60">Gerencie sua base de clientes</p>
+            <div className="bg-dark-800 border-b border-white/10 p-4 flex items-center justify-between">
+                <div>
+                    <h1 className="text-2xl font-display font-bold text-white">Clientes</h1>
+                    <p className="text-sm text-white/60">Gerencie sua base de clientes</p>
+                </div>
+                <Button onClick={openAddModal} icon={<Plus size={18} />}>
+                    Novo Cliente
+                </Button>
             </div>
 
-            <div className="p-4 pb-24 max-w-7xl mx-auto">
+            <div className="p-4 pb-6 max-w-7xl mx-auto">
                 {/* Absent Customers Alert */}
                 {absentCustomers.length > 0 && (
                     <Card className="mb-4 bg-orange-500/10 border-orange-500/30">
@@ -162,11 +212,17 @@ const Customers = () => {
                             <Card key={customer.id} hover className={isAbsent ? 'border-orange-500/30' : ''}>
                                 <div className="flex items-start gap-4">
                                     {/* Photo */}
-                                    <img
-                                        src={customer.photo}
-                                        alt={customer.name}
-                                        className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
-                                    />
+                                    {customer.photo ? (
+                                        <img
+                                            src={customer.photo}
+                                            alt={customer.name}
+                                            className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+                                        />
+                                    ) : (
+                                        <div className="w-16 h-16 rounded-lg bg-dark-900 flex items-center justify-center flex-shrink-0">
+                                            <UsersIcon className="text-white/40" size={24} />
+                                        </div>
+                                    )}
 
                                     {/* Info */}
                                     <div className="flex-1 min-w-0">
@@ -180,34 +236,38 @@ const Customers = () => {
                                                         <Phone size={12} />
                                                         {customer.phone}
                                                     </span>
-                                                    <span className="flex items-center gap-1">
-                                                        <Mail size={12} />
-                                                        {customer.email}
-                                                    </span>
+                                                    {customer.email && (
+                                                        <span className="flex items-center gap-1">
+                                                            <Mail size={12} />
+                                                            {customer.email}
+                                                        </span>
+                                                    )}
                                                 </div>
                                             </div>
-                                            <Badge variant={getTierBadgeVariant(customer.tier)}>
-                                                {customer.tier}
-                                            </Badge>
+                                            {customer.tier && (
+                                                <Badge variant={getTierBadgeVariant(customer.tier)}>
+                                                    {customer.tier}
+                                                </Badge>
+                                            )}
                                         </div>
 
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3 text-sm">
                                             <div>
                                                 <span className="text-white/60">Visitas: </span>
-                                                <span className="text-white font-medium">{customer.visits}</span>
+                                                <span className="text-white font-medium">{customer.visits || 0}</span>
                                             </div>
                                             <div>
                                                 <span className="text-white/60">Total Gasto: </span>
-                                                <span className="text-white font-medium">{formatCurrency(customer.totalSpent)}</span>
+                                                <span className="text-white font-medium">{formatCurrency(customer.totalSpent || 0)}</span>
                                             </div>
                                             <div>
                                                 <span className="text-white/60">Pontos: </span>
-                                                <span className="text-white font-medium">{customer.loyaltyPoints}</span>
+                                                <span className="text-white font-medium">{customer.loyaltyPoints || 0}</span>
                                             </div>
                                             <div>
                                                 <span className="text-white/60">Última Visita: </span>
                                                 <span className={`font-medium ${isAbsent ? 'text-orange-500' : 'text-white'}`}>
-                                                    {daysAbsent ? `${daysAbsent} dias atrás` : new Date(customer.lastVisit).toLocaleDateString('pt-BR')}
+                                                    {daysAbsent ? `${daysAbsent} dias atrás` : customer.lastVisit ? new Date(customer.lastVisit).toLocaleDateString('pt-BR') : 'Nunca'}
                                                 </span>
                                             </div>
                                         </div>
@@ -219,8 +279,22 @@ const Customers = () => {
                                                 onClick={() => handleWhatsAppContact(customer)}
                                                 icon={<MessageCircle size={16} />}
                                             >
-                                                {isAbsent ? 'Reengajar via WhatsApp' : 'WhatsApp'}
+                                                {isAbsent ? 'Reengajar' : 'WhatsApp'}
                                             </Button>
+                                            <button
+                                                onClick={() => openEditModal(customer)}
+                                                className="p-2 rounded-lg hover:bg-white/10 text-white/60 hover:text-white transition-colors"
+                                                title="Editar"
+                                            >
+                                                <Pencil size={16} />
+                                            </button>
+                                            <button
+                                                onClick={() => setConfirmDelete(customer.id)}
+                                                className="p-2 rounded-lg hover:bg-red-500/20 text-white/60 hover:text-red-400 transition-colors"
+                                                title="Excluir"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
                                         </div>
 
                                         {customer.notes && (
@@ -237,34 +311,84 @@ const Customers = () => {
                     {filteredCustomers.length === 0 && (
                         <Card className="text-center py-12">
                             <UsersIcon className="mx-auto mb-4 text-white/30" size={48} />
-                            <p className="text-white/60">Nenhum cliente encontrado</p>
+                            <p className="text-white/60 mb-4">Nenhum cliente encontrado</p>
+                            <Button onClick={openAddModal} icon={<Plus size={18} />}>
+                                Adicionar Primeiro Cliente
+                            </Button>
                         </Card>
                     )}
                 </div>
             </div>
 
-            {/* Mobile Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 bg-dark-800 border-t border-white/10 lg:hidden">
-                <div className="flex items-center justify-around p-2">
-                    {[
-                        { icon: Home, label: 'Início', to: '/admin' },
-                        { icon: CalendarDays, label: 'Agenda', to: '/admin/agenda' },
-                        { icon: UsersIcon, label: 'Clientes', to: '/admin/clientes' },
-                        { icon: Award, label: 'Fidelidade', to: '/admin/fidelidade' },
-                    ].map((item) => (
-                        <Link
-                            key={item.to}
-                            to={item.to}
-                            className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/5 transition-colors flex-1"
-                        >
-                            <item.icon size={20} className={item.to === '/admin/clientes' ? 'text-accent-purple' : 'text-white/60'} />
-                            <span className={`text-xs ${item.to === '/admin/clientes' ? 'text-accent-purple' : 'text-white/60'}`}>
-                                {item.label}
-                            </span>
-                        </Link>
-                    ))}
+            {/* Add/Edit Modal */}
+            <Modal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                title={editingCustomer ? 'Editar Cliente' : 'Novo Cliente'}
+            >
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <Input
+                        label="Nome"
+                        placeholder="Nome completo"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        required
+                    />
+                    <Input
+                        label="Telefone (WhatsApp)"
+                        placeholder="(11) 98765-4321"
+                        type="tel"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        required
+                    />
+                    <Input
+                        label="Email"
+                        placeholder="email@exemplo.com"
+                        type="email"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    />
+                    <Input
+                        label="Observações"
+                        placeholder="Preferências, anotações..."
+                        value={form.notes}
+                        onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                    />
+
+                    <div className="flex gap-3 pt-2">
+                        <Button type="button" variant="secondary" className="flex-1" onClick={() => setModalOpen(false)}>
+                            Cancelar
+                        </Button>
+                        <Button type="submit" className="flex-1" disabled={!isFormValid}>
+                            {editingCustomer ? 'Salvar Alterações' : 'Adicionar Cliente'}
+                        </Button>
+                    </div>
+                </form>
+            </Modal>
+
+            {/* Delete Confirmation */}
+            <Modal
+                isOpen={!!confirmDelete}
+                onClose={() => setConfirmDelete(null)}
+                title="Confirmar Exclusão"
+            >
+                <p className="text-white/70 mb-6">
+                    Tem certeza que deseja excluir este cliente? Esta ação não pode ser desfeita.
+                </p>
+                <div className="flex gap-3">
+                    <Button variant="secondary" className="flex-1" onClick={() => setConfirmDelete(null)}>
+                        Cancelar
+                    </Button>
+                    <Button
+                        variant="primary"
+                        className="flex-1 !bg-red-500 hover:!bg-red-600"
+                        onClick={() => handleDelete(confirmDelete)}
+                    >
+                        Excluir
+                    </Button>
                 </div>
-            </nav>
+            </Modal>
         </div>
     )
 }

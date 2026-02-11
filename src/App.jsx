@@ -14,6 +14,7 @@ import BookingConfirmation from './pages/public/BookingConfirmation'
 
 // Admin Pages
 import Login from './pages/admin/Login'
+import AdminLayout from './components/admin/AdminLayout'
 import Dashboard from './pages/admin/Dashboard'
 import Agenda from './pages/admin/Agenda'
 import Customers from './pages/admin/Customers'
@@ -38,13 +39,15 @@ function App() {
                                 {/* Admin Login */}
                                 <Route path="/admin/login" element={<Login />} />
 
-                                {/* Protected Admin Routes */}
-                                <Route path="/admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                                <Route path="/admin/agenda" element={<ProtectedRoute><Agenda /></ProtectedRoute>} />
-                                <Route path="/admin/clientes" element={<ProtectedRoute><Customers /></ProtectedRoute>} />
-                                <Route path="/admin/fidelidade" element={<ProtectedRoute><LoyaltyProgram /></ProtectedRoute>} />
-                                <Route path="/admin/servicos" element={<ProtectedRoute><Services /></ProtectedRoute>} />
-                                <Route path="/admin/barbeiros" element={<ProtectedRoute><Barbers /></ProtectedRoute>} />
+                                {/* Protected Admin Routes (nested under AdminLayout) */}
+                                <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+                                    <Route index element={<Dashboard />} />
+                                    <Route path="agenda" element={<Agenda />} />
+                                    <Route path="clientes" element={<Customers />} />
+                                    <Route path="servicos" element={<Services />} />
+                                    <Route path="barbeiros" element={<Barbers />} />
+                                    <Route path="fidelidade" element={<LoyaltyProgram />} />
+                                </Route>
                             </Routes>
                             <ToastContainer />
                         </AppProvider>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import {
     Calendar,
+    CalendarDays,
     Users,
     TrendingUp,
     Clock,
@@ -8,8 +9,6 @@ import {
     UserPlus,
     Scissors,
     BarChart3,
-    Home,
-    CalendarDays,
     Award
 } from 'lucide-react'
 import { useApp } from '../../contexts/AppContext'
@@ -82,7 +81,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-dark">
+        <div>
             {/* Mobile Header */}
             <div className="bg-dark-800 border-b border-white/10 p-4">
                 <h1 className="text-2xl font-display font-bold text-white">
@@ -91,7 +90,7 @@ const Dashboard = () => {
                 <p className="text-sm text-white/60">Bem-vindo de volta!</p>
             </div>
 
-            <div className="p-4 pb-24 max-w-7xl mx-auto">
+            <div className="p-4 pb-6 max-w-7xl mx-auto">
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                     {stats.map((stat, index) => (
@@ -283,29 +282,6 @@ const Dashboard = () => {
                     </Card>
                 </div>
             </div>
-
-            {/* Mobile Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 bg-dark-800 border-t border-white/10 lg:hidden">
-                <div className="flex items-center justify-around p-2">
-                    {[
-                        { icon: Home, label: 'Início', to: '/admin' },
-                        { icon: CalendarDays, label: 'Agenda', to: '/admin/agenda' },
-                        { icon: Users, label: 'Clientes', to: '/admin/clientes' },
-                        { icon: Award, label: 'Fidelidade', to: '/admin/fidelidade' },
-                    ].map((item) => (
-                        <Link
-                            key={item.to}
-                            to={item.to}
-                            className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/5 transition-colors flex-1"
-                        >
-                            <item.icon size={20} className={item.to === '/admin' ? 'text-accent-purple' : 'text-white/60'} />
-                            <span className={`text-xs ${item.to === '/admin' ? 'text-accent-purple' : 'text-white/60'}`}>
-                                {item.label}
-                            </span>
-                        </Link>
-                    ))}
-                </div>
-            </nav>
         </div>
     )
 }

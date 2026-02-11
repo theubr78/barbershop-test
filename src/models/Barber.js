@@ -20,7 +20,7 @@ export class Barber {
 
         // 2. Check if time is within working hours
         // Simple check: exists in generated slots
-        const slots = generateTimeSlots(schedule.start, schedule.end)
+        const slots = generateTimeSlots(schedule.start, schedule.end, schedule.interval || 30)
         if (!slots.includes(timeStr)) return false
 
         // 3. Check for conflict with existing appointments
