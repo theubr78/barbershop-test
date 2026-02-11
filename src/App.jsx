@@ -93,8 +93,16 @@ function App() {
                             </BarbershopProvider>
                         } />
 
-                        {/* Root landing (no shop context) */}
-                        <Route path="/" element={<Landing />} />
+                        {/* Root landing (fallback to demo) */}
+                        <Route path="/" element={
+                            <BarbershopProvider>
+                                <SubscriptionProvider>
+                                    <AppProvider>
+                                        <Landing />
+                                    </AppProvider>
+                                </SubscriptionProvider>
+                            </BarbershopProvider>
+                        } />
                     </Routes>
                 </ToastProvider>
             </AuthProvider>
