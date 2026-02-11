@@ -69,7 +69,7 @@ const MasterDashboard = () => {
         setCreating(true)
 
         try {
-            const response = await fetch('/api/create-subscription', {
+            const response = await fetch('/api/create_sub', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
