@@ -42,6 +42,9 @@ function App() {
                             </ProtectedRoute>
                         } />
 
+                        {/* Explicit redirect for legacy /admin to master or setup */}
+                        <Route path="/admin" element={<Navigate to="/master/login" replace />} />
+
                         {/* Setup Admin */}
                         <Route path="/setup-admin" element={<SetupAdmin />} />
 
