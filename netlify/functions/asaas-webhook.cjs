@@ -1,7 +1,7 @@
-import { findBarbershopByAsaasCustomer, updateSubscriptionStatus } from './utils/firebase-admin.js'
-import { getPayment } from './utils/asaas-client.js'
+const { findBarbershopByAsaasCustomer, updateSubscriptionStatus } = require('./utils/firebase-admin.cjs')
+const { getPayment } = require('./utils/asaas-client.cjs')
 
-export const handler = async (event) => {
+exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method not allowed' }
     }

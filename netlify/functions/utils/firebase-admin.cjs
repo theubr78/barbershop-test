@@ -1,5 +1,5 @@
-import { initializeApp, cert, getApps } from 'firebase-admin/app'
-import { getFirestore } from 'firebase-admin/firestore'
+const { initializeApp, cert, getApps } = require('firebase-admin/app')
+const { getFirestore } = require('firebase-admin/firestore')
 
 let db
 
@@ -68,7 +68,7 @@ async function findBarbershopByAsaasCustomer(asaasCustomerId) {
     return { id: doc.id, ...doc.data() }
 }
 
-export {
+module.exports = {
     getDb,
     getBarbershop,
     updateSubscriptionStatus,
