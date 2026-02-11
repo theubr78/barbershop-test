@@ -69,7 +69,7 @@ const MasterDashboard = () => {
         setCreating(true)
 
         try {
-            const response = await fetch('/api/api', {
+            const response = await fetch('/api/test-api', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
