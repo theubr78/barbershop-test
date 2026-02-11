@@ -35,3 +35,6 @@ lerna-debug.log*
 
 # Build
 build
+
+# Local Netlify folder
+.netlify
