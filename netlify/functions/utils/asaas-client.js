@@ -73,7 +73,7 @@ async function createSubAccount({ name, email, cpfCnpj }) {
     })
 }
 
-module.exports = {
+export {
     createCustomer,
     createSubscription,
     getSubscription,

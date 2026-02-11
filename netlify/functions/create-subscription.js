@@ -1,5 +1,5 @@
-const { createBarbershop } = require('./utils/firebase-admin')
-const { createCustomer, createSubscription } = require('./utils/asaas-client')
+import { createBarbershop } from './utils/firebase-admin.js'
+import { createCustomer, createSubscription } from './utils/asaas-client.js'
 
 const MONTHLY_PRICE = 97.00
 const SPLIT_CONFIG = [
@@ -14,7 +14,7 @@ const SPLIT_CONFIG = [
     // Matheus (34%) receives in main account — no split entry needed
 ]
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method not allowed' }
     }
