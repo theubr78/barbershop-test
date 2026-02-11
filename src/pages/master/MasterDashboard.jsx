@@ -69,7 +69,7 @@ const MasterDashboard = () => {
         setCreating(true)
 
         try {
-            const response = await fetch('/api/subscription', {
+            const response = await fetch('/api/test-firebase', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
