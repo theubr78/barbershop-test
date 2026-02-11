@@ -1,6 +1,0 @@
-exports.handler = async function (event, context) {
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "API is online", version: "1.0", node: process.version })
-    };
-};
