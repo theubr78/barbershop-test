@@ -137,6 +137,8 @@ exports.handler = async (event) => {
             }
         }
 
+        console.log(`[CreateSub] Debug: Webhook Token Set? ${!!process.env.ASAAS_WEBHOOK_TOKEN}`)
+        console.log(`[CreateSub] Debug: Abimael Wallet Set? ${!!process.env.ASAAS_WALLET_ABIMAEL}`)
         console.log(`[CreateSub] Creating subscription for: ${shopName} (${shopSlug})`)
 
         const asaasCustomer = await createCustomer({
