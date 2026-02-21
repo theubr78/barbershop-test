@@ -5,12 +5,7 @@
 [functions]
   directory = "netlify/functions"
 
-# SPA redirect - all routes go to index.html
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["admin"]}
+
 
 
 # API routes go to functions
