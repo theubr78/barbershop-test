@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import SetupAdmin from './SetupAdmin'
 import { AuthProvider } from './contexts/AuthContext'
+import { ToastProvider } from './contexts/ToastContext'
+import ProtectedRoute from './components/ProtectedRoute'
+import SubscriptionGate from './components/SubscriptionGate'
+import ShopLayout from './components/ShopLayout'
 import { BarbershopProvider } from './contexts/BarbershopContext'
 import { SubscriptionProvider } from './contexts/SubscriptionContext'
 import { AppProvider } from './contexts/AppContext'
-import { ToastProvider } from './contexts/ToastContext'
-import ToastContainer from './components/ui/ToastContainer'
-import ProtectedRoute from './components/ProtectedRoute'
-import SubscriptionGate from './components/SubscriptionGate'
 
 // Public Pages
 import Landing from './pages/public/Landing'
@@ -48,55 +48,44 @@ function App() {
                         {/* Setup Admin */}
                         <Route path="/setup-admin" element={<SetupAdmin />} />
 
-                        {/* Shop-specific routes wrapped in BarbershopProvider */}
-                        <Route path="/:shopSlug/*" element={
-                            <BarbershopProvider>
-                                <SubscriptionProvider>
-                                    <AppProvider>
-                                        <Routes>
-                                            {/* Public Routes (blocked if subscription inactive) */}
-                                            <Route path="/" element={
-                                                <SubscriptionGate>
-                                                    <Landing />
-                                                </SubscriptionGate>
-                                            } />
-                                            <Route path="/agendar" element={
-                                                <SubscriptionGate>
-                                                    <BookingFlow />
-                                                </SubscriptionGate>
-                                            } />
-                                            <Route path="/confirmacao/:id" element={
-                                                <SubscriptionGate>
-                                                    <BookingConfirmation />
-                                                </SubscriptionGate>
-                                            } />
+                        {/* Shop-specific routes using ShopLayout */}
+                        <Route path="/:shopSlug" element={<ShopLayout />}>
+                            {/* Public Routes */}
+                            <Route index element={
+                                <SubscriptionGate>
+                                    <Landing />
+                                </SubscriptionGate>
+                            } />
+                            <Route path="agendar" element={
+                                <SubscriptionGate>
+                                    <BookingFlow />
+                                </SubscriptionGate>
+                            } />
+                            <Route path="confirmacao/:id" element={
+                                <SubscriptionGate>
+                                    <BookingConfirmation />
+                                </SubscriptionGate>
+                            } />
 
-                                            {/* Admin Login */}
-                                            <Route path="/admin/login" element={<Login />} />
+                            {/* Admin Login */}
+                            <Route path="admin/login" element={<Login />} />
 
-                                            {/* Protected Admin Routes */}
-                                            <Route path="/admin" element={
-                                                <ProtectedRoute>
-                                                    <SubscriptionGate>
-                                                        <AdminLayout />
-                                                    </SubscriptionGate>
-                                                </ProtectedRoute>
-                                            }>
-                                                <Route index element={<Dashboard />} />
-                                                <Route path="agenda" element={<Agenda />} />
-                                                <Route path="clientes" element={<Customers />} />
-                                                <Route path="servicos" element={<Services />} />
-                                                <Route path="barbeiros" element={<Barbers />} />
-                                                <Route path="fidelidade" element={<LoyaltyProgram />} />
-                                            </Route>
-                                        </Routes>
-                                        <ToastContainer />
-                                    </AppProvider>
-                                </SubscriptionProvider>
-                            </BarbershopProvider>
-                        } />
-
-                        {/* Root landing (fallback to demo) */}
+                            {/* Protected Admin Routes */}
+                            <Route path="admin" element={
+                                <ProtectedRoute>
+                                    <SubscriptionGate>
+                                        <AdminLayout />
+                                    </SubscriptionGate>
+                                </ProtectedRoute>
+                            }>
+                                <Route index element={<Dashboard />} />
+                                <Route path="agenda" element={<Agenda />} />
+                                <Route path="clientes" element={<Customers />} />
+                                <Route path="servicos" element={<Services />} />
+                                <Route path="barbeiros" element={<Barbers />} />
+                                <Route path="fidelidade" element={<LoyaltyProgram />} />
+                            </Route>
+                        </Route>
                         <Route path="/" element={
                             <BarbershopProvider>
                                 <SubscriptionProvider>

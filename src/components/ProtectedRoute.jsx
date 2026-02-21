@@ -1,8 +1,9 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 export default function ProtectedRoute({ children }) {
     const { isAuthenticated, loading } = useAuth()
+    const { shopSlug } = useParams()
 
     if (loading) {
         return (
@@ -16,7 +17,8 @@ export default function ProtectedRoute({ children }) {
     }
 
     if (!isAuthenticated) {
-        return <Navigate to="/admin/login" replace />
+        const loginPath = shopSlug ? `/${shopSlug}/admin/login` : '/master/login'
+        return <Navigate to={loginPath} replace />
     }
 
     return children

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
     Calendar,
     CalendarDays,
@@ -17,6 +17,7 @@ import Badge from '../../components/ui/Badge'
 import { formatCurrency, formatDate, formatTime } from '../../utils/helpers'
 
 const Dashboard = () => {
+    const { shopSlug } = useParams()
     const { appointments, customers, services, barbers, statistics, getServiceById, getBarberById, getCustomerById } = useApp()
 
     const today = new Date().toISOString().split('T')[0]
@@ -119,7 +120,7 @@ const Dashboard = () => {
                                 <Clock size={20} className="text-accent-purple" />
                                 Agenda de Hoje
                             </h2>
-                            <Link to="/admin/agenda">
+                            <Link to={`/${shopSlug}/admin/agenda`}>
                                 <button className="text-sm text-accent-purple hover:text-accent-purple/80">
                                     Ver Tudo
                                 </button>
@@ -215,7 +216,7 @@ const Dashboard = () => {
                     <Card className="lg:col-span-2">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-lg font-semibold text-white">Próximos Agendamentos</h2>
-                            <Link to="/admin/agenda">
+                            <Link to={`/${shopSlug}/admin/agenda`}>
                                 <button className="text-sm text-accent-purple hover:text-accent-purple/80">
                                     Ver Agenda
                                 </button>
@@ -260,19 +261,19 @@ const Dashboard = () => {
                     <Card>
                         <h2 className="text-lg font-semibold text-white mb-4">Ações Rápidas</h2>
                         <div className="space-y-2">
-                            <Link to="/admin/agenda">
+                            <Link to={`/${shopSlug}/admin/agenda`}>
                                 <button className="w-full p-3 rounded-lg bg-dark-900/50 hover:bg-dark-900 border border-white/10 flex items-center gap-3 transition-colors">
                                     <CalendarDays className="text-accent-purple" size={20} />
                                     <span className="text-sm text-white">Ver Agenda</span>
                                 </button>
                             </Link>
-                            <Link to="/admin/clientes">
+                            <Link to={`/${shopSlug}/admin/clientes`}>
                                 <button className="w-full p-3 rounded-lg bg-dark-900/50 hover:bg-dark-900 border border-white/10 flex items-center gap-3 transition-colors">
                                     <Users className="text-blue-500" size={20} />
                                     <span className="text-sm text-white">Clientes</span>
                                 </button>
                             </Link>
-                            <Link to="/admin/fidelidade">
+                            <Link to={`/${shopSlug}/admin/fidelidade`}>
                                 <button className="w-full p-3 rounded-lg bg-dark-900/50 hover:bg-dark-900 border border-white/10 flex items-center gap-3 transition-colors">
                                     <Award className="text-accent-gold" size={20} />
                                     <span className="text-sm text-white">Fidelidade</span>

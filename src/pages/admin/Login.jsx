@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { Lock, Mail, AlertCircle } from 'lucide-react'
 import Button from '../../components/ui/Button'
@@ -7,6 +7,7 @@ import Input from '../../components/ui/Input'
 
 export default function Login() {
     const navigate = useNavigate()
+    const { shopSlug } = useParams()
     const { login, error: authError } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -25,7 +26,7 @@ export default function Login() {
         try {
             setLoading(true)
             await login(email, password)
-            navigate('/admin')
+            navigate(`/${shopSlug}/admin`)
         } catch (err) {
             console.error('Login error:', err)
             setError('Email ou senha incorretos')

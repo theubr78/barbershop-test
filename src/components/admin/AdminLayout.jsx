@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom'
 import {
     Home,
     CalendarDays,
@@ -14,23 +14,25 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 
-const navItems = [
-    { icon: Home, label: 'Dashboard', to: '/admin', end: true },
-    { icon: CalendarDays, label: 'Agenda', to: '/admin/agenda' },
-    { icon: Users, label: 'Clientes', to: '/admin/clientes' },
-    { icon: Scissors, label: 'Serviços', to: '/admin/servicos' },
-    { icon: UserCheck, label: 'Barbeiros', to: '/admin/barbeiros' },
-    { icon: Award, label: 'Fidelidade', to: '/admin/fidelidade' },
+const getNavItems = (shopSlug) => [
+    { icon: Home, label: 'Dashboard', to: `/${shopSlug}/admin`, end: true },
+    { icon: CalendarDays, label: 'Agenda', to: `/${shopSlug}/admin/agenda` },
+    { icon: Users, label: 'Clientes', to: `/${shopSlug}/admin/clientes` },
+    { icon: Scissors, label: 'Serviços', to: `/${shopSlug}/admin/servicos` },
+    { icon: UserCheck, label: 'Barbeiros', to: `/${shopSlug}/admin/barbeiros` },
+    { icon: Award, label: 'Fidelidade', to: `/${shopSlug}/admin/fidelidade` },
 ]
 
 const AdminLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const { logout } = useAuth()
     const navigate = useNavigate()
+    const { shopSlug } = useParams()
+    const navItems = getNavItems(shopSlug)
 
     const handleLogout = async () => {
         await logout()
-        navigate('/admin/login')
+        navigate(`/${shopSlug}/admin/login`)
     }
 
     const closeSidebar = () => setSidebarOpen(false)
